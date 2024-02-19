@@ -12,6 +12,6 @@ final class PageTests: XCTestCase {
             lastEditedTime: DateFormatter.iso8601Notion.date(from: "2020-03-17T19:10:04.968Z")!
         )
 
-        try XCTAssertEqual(json, to: expected)
+        try assert(decoding: json, to: expected)
     }
 }

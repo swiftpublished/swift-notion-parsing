@@ -1,5 +1,5 @@
-func XCTAssertEqual<T>(
-    _ json: String,
+func assert<T>(
+    decoding json: String,
     to expected: @autoclosure () -> T,
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
