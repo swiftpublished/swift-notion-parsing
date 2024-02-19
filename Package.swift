@@ -1,23 +1,31 @@
 // swift-tools-version: 5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "swift-notion-parsing",
+    platforms: [
+        .macOS(.v13)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "swift-notion-parsing",
-            targets: ["swift-notion-parsing"]),
+            name: "SwiftNotionParsing",
+            targets: ["SwiftNotionParsing"]
+        )
+    ],
+    dependencies: [
+        .package(url: "https://github.com/swiftpublished/swift-macros.git", branch: "main")
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "swift-notion-parsing"),
+            name: "SwiftNotionParsing",
+            dependencies: [
+                .product(name: "SwiftMacrosInterface", package: "swift-macros")
+            ]
+        ),
         .testTarget(
-            name: "swift-notion-parsingTests",
-            dependencies: ["swift-notion-parsing"]),
+            name: "SwiftNotionParsingTests",
+            dependencies: ["SwiftNotionParsing"]
+        )
     ]
 )

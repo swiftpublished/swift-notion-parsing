@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift-macros",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftpublished/swift-macros.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "dc97febc5b5520917d54bea91a845e4861da1dac"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax.git",
+      "state" : {
+        "revision" : "64889f0c732f210a935a0ad7cda38f77f876262d",
+        "version" : "509.1.1"
+      }
+    }
+  ],
+  "version" : 2
+}
