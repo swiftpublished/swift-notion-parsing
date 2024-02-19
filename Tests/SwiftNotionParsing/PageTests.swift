@@ -1,19 +1,17 @@
-import XCTest
-@testable import SwiftNotionParsing
-
 final class PageTests: XCTestCase {
-    func testPage() throws {
+    func testBasicPage() throws {
         let json: String = """
         {
             "id": "59833787-2cf9-4fdf-8782-e53db20768a5",
-            "last_edited_time": "2022-07-06T20:25:00.000Z"
+            "last_edited_time": "2020-03-17T19:10:04.968Z"
         }
         """
 
-        let data = json.data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        let page: Page = try decoder.decode(Page.self, from: data)
-        XCTAssertEqual(page.id, "59833787-2cf9-4fdf-8782-e53db20768a5")
+        let expected = Page(
+            id: UUID(uuidString: "59833787-2cf9-4fdf-8782-e53db20768a5")!,
+            lastEditedTime: DateFormatter.iso8601Notion.date(from: "2020-03-17T19:10:04.968Z")!
+        )
+
+        try XCTAssertEqual(json, to: expected)
     }
 }
