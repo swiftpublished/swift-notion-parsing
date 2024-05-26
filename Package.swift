@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.10
 
 import PackageDescription
 
@@ -14,7 +14,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/swiftpublished/swift-macros.git", branch: "main")
+        .package(path: "../swift-macros")
+//        .package(url: "https://github.com/swiftpublished/swift-macros.git", branch: "main")
     ],
     targets: [
         .target(

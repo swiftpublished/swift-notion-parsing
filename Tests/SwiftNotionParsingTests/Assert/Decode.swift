@@ -1,3 +1,7 @@
+@testable import SwiftNotionParsing
+import Foundation
+import XCTest
+
 func assert<T>(
     decoding json: String,
     to expected: @autoclosure () -> T,
