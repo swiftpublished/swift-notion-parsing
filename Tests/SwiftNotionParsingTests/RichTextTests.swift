@@ -20,7 +20,7 @@ final class RichTextTests: XCTestCase {
         }
         """
 
-        let text = RichText.Kind.Text(content: "This is an ", link: nil)
+        let text = RichText.Types.Text(content: "This is an ", link: nil)
         let annotations = RichText.Annotations(
             bold: false,
             italic: false,
@@ -53,8 +53,8 @@ final class RichTextTests: XCTestCase {
         }
         """
 
-        let link = RichText.Kind.Text.Link(url: URL(string: "https://developers.notion.com/")!)
-        let text = RichText.Kind.Text(content: "This is an ", link: link)
+        let link = RichText.Types.Text.Link(url: URL(string: "https://developers.notion.com/")!)
+        let text = RichText.Types.Text(content: "This is an ", link: link)
         let annotations = RichText.Annotations(
             bold: false,
             italic: false,

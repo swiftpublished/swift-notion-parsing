@@ -15,15 +15,15 @@ struct Page: Decodable, Equatable {
         struct Title: Decodable, Equatable {
             let text: String
 
-            enum CodingKey: Swift.CodingKey {
+            enum CodingKeys: CodingKey {
                 case title
             }
 
             init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: CodingKey.self)
+                let container = try decoder.container(keyedBy: CodingKeys.self)
 
                 let texts = try container.decode([RichText].self, forKey: .title)
-                self.text = texts.map(\.kind.description).joined()
+                self.text = texts.map(\.type.description).joined()
             }
 
             init(text: String) {
