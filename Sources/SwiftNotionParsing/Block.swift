@@ -1,6 +1,8 @@
-struct Block {
-    let id: String
+public struct Block {
+    public let id: String
+    public let hasChildren: Bool
     let type: Types
+    public var children: [Block]?
 }
 
 extension Block {
@@ -14,23 +16,25 @@ extension Block: Decodable {
     enum CodingKeys: CodingKey {
         case id
         case type
+        case has_children
 
         enum Types: String, CodingKey, Decodable {
-            case bulletedListItem = "bulleted_list_item"
+            case bulleted_list_item
             case paragraph
         }
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         self.id = try container.decode(String.self, forKey: .id)
+        self.hasChildren = try container.decode(Bool.self, forKey: .has_children)
 
         let type = try container.decode(CodingKeys.Types.self, forKey: .type)
         let typesContainer = try decoder.container(keyedBy: CodingKeys.Types.self)
         switch type {
-        case .bulletedListItem:
-            let bulletedListItem = try typesContainer.decode(BulletedListItem.self, forKey: .bulletedListItem)
+        case .bulleted_list_item:
+            let bulletedListItem = try typesContainer.decode(BulletedListItem.self, forKey: .bulleted_list_item)
             self.type = .bulletedListItem(bulletedListItem)
         case .paragraph:
             let paragraph = try typesContainer.decode(Paragraph.self, forKey: .paragraph)

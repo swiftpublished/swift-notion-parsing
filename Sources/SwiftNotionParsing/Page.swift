@@ -2,7 +2,7 @@ import Foundation
 import SwiftMacrosInterface
 
 @CodingKeys(using: .snake_case)
-struct Page: Decodable, Equatable {
+public struct Page: Decodable, Equatable {
     let id: UUID
     let lastEditedTime: Date
     let properties: Properties

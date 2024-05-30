@@ -1,6 +1,6 @@
 import Foundation
 
-extension DateFormatter {
+public extension DateFormatter {
     ///
     /// ISO 8601 Date Time string formatter
     ///
