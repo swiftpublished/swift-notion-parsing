@@ -1,4 +1,4 @@
-@testable import SwiftNotionParsing
+@testable import NotionParsing
 import XCTest
 
 final class PageTests: XCTestCase {

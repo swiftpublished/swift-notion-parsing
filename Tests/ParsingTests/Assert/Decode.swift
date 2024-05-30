@@ -1,4 +1,4 @@
-@testable import SwiftNotionParsing
+@testable import NotionParsing
 import Foundation
 import XCTest
 
