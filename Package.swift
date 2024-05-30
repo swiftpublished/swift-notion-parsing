@@ -9,8 +9,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "SwiftNotionParsing",
-            targets: ["SwiftNotionParsing"]
+            name: "NotionParsing",
+            targets: ["NotionParsing"]
         )
     ],
     dependencies: [
@@ -19,14 +19,16 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SwiftNotionParsing",
+            name: "NotionParsing",
             dependencies: [
-                .product(name: "SwiftMacrosInterface", package: "swift-macros")
-            ]
+                .product(name: "MacrosInterface", package: "swift-macros")
+            ],
+            path: "Sources/Parsing"
         ),
         .testTarget(
-            name: "SwiftNotionParsingTests",
-            dependencies: ["SwiftNotionParsing"]
+            name: "NotionParsingTests",
+            dependencies: ["NotionParsing"],
+            path: "Tests/ParsingTests"
         )
     ]
 )

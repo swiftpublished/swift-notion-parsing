@@ -1,5 +1,5 @@
 import Foundation
-import SwiftMacrosInterface
+import MacrosInterface
 
 @CodingKeys(using: .snake_case)
 public struct Page: Decodable, Equatable {

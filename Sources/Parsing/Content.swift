@@ -1,4 +1,4 @@
-import SwiftMacrosInterface
+import MacrosInterface
 
 @CodingKeys(using: .snake_case)
 public struct Content: Decodable {

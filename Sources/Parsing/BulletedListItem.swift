@@ -1,4 +1,4 @@
-import SwiftMacrosInterface
+import MacrosInterface
 
 extension Block {
     @CodingKeys(using: .snake_case)
