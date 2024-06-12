@@ -1,9 +1,12 @@
 import MacrosInterface
 
-extension Block {
-    @CodingKeys(using: .snake_case)
-    struct Paragraph: Decodable {
-        let richText: [RichText]
+public extension Block {
+    @PublicInit
+    @CodingKeys
+    struct Paragraph: Codable, Equatable {
+        @CodingKey(name: "rich_text")
+        public let richTexts: [RichText]
+
         let children: [Block]?
     }
 }

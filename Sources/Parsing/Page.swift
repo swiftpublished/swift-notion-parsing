@@ -1,33 +1,31 @@
 import Foundation
 import MacrosInterface
 
+@PublicInit
 @CodingKeys(using: .snake_case)
-public struct Page: Decodable, Equatable {
+public struct Page: Codable, Equatable {
     let id: UUID
     let lastEditedTime: Date
-    let properties: Properties
+    public let properties: Properties
+    public var content: Content?
 
+    @PublicInit
     @CodingKeys
-    struct Properties: Decodable, Equatable {
+    public struct Properties: Codable, Equatable {
         @CodingKey(name: "Name")
-        let title: Title
+        public let title: Title
 
-        struct Title: Decodable, Equatable {
-            let text: String
+        @PublicInit
+        @CodingKeys
+        public struct Title: Codable, Equatable {
+            @CodingKey(name: "title")
+            public let text: String
 
-            enum CodingKeys: CodingKey {
-                case title
-            }
-
-            init(from decoder: Decoder) throws {
+            public init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
 
-                let texts = try container.decode([RichText].self, forKey: .title)
+                let texts = try container.decode([RichText].self, forKey: .text)
                 self.text = texts.map(\.type.description).joined()
-            }
-
-            init(text: String) {
-                self.text = text
             }
         }
     }

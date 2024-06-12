@@ -1,8 +1,11 @@
 import MacrosInterface
 
+@PublicInit
 @CodingKeys(using: .snake_case)
-public struct Content: Decodable {
+public struct Content: Codable, Equatable {
     public let nextCursor: String?
     public let hasMore: Bool
-    public var results: [Block]
+
+    @CodingKey(name: "results")
+    public var blocks: [Block]
 }

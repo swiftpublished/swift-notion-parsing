@@ -1,22 +1,26 @@
-public struct Block {
+import MacrosInterface
+
+@PublicInit
+public struct Block: Equatable {
     public let id: String
     public let hasChildren: Bool
-    let type: Types
+    public let type: Types
     public var children: [Block]?
 }
 
-extension Block {
-    enum Types: Decodable {
+public extension Block {
+    enum Types: Codable, Equatable {
         case paragraph(Paragraph)
         case bulletedListItem(BulletedListItem)
     }
 }
 
-extension Block: Decodable {
+extension Block: Codable {
     enum CodingKeys: CodingKey {
         case id
         case type
         case has_children
+        case children
 
         enum Types: String, CodingKey, Decodable {
             case bulleted_list_item
@@ -40,5 +44,24 @@ extension Block: Decodable {
             let paragraph = try typesContainer.decode(Paragraph.self, forKey: .paragraph)
             self.type = .paragraph(paragraph)
         }
+    }
+
+    public func encode(to encoder: any Encoder) throws {
+        var container = try encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(id, forKey: .id)
+        try container.encode(hasChildren, forKey: .has_children)
+
+        var typesContainer = try encoder.container(keyedBy: CodingKeys.Types.self)
+        switch self.type {
+        case .paragraph(let paragraph):
+            try container.encode(CodingKeys.Types.paragraph.rawValue, forKey: .type)
+            try typesContainer.encode(paragraph, forKey: .paragraph)
+        case .bulletedListItem(let bulletedListItem):
+            try container.encode(CodingKeys.Types.bulleted_list_item.rawValue, forKey: .type)
+            try typesContainer.encode(bulletedListItem, forKey: .bulleted_list_item)
+        }
+
+        try container.encodeIfPresent(children, forKey: .children)
     }
 }

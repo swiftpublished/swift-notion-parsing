@@ -1,15 +1,21 @@
 import Foundation
+import MacrosInterface
 
-struct RichText: Equatable {
-    let type: Types
-    let annotations: Annotations
+public struct RichText: Equatable, Codable {
+    public let type: Types
+    public let annotations: Annotations
+
+    public init(type: Types, annotations: Annotations) {
+        self.type = type
+        self.annotations = annotations
+    }
 }
 
-extension RichText: Decodable {
-    enum Types: Decodable, Equatable, CustomStringConvertible {
+public extension RichText {
+    enum Types: Codable, Equatable, CustomStringConvertible {
         case text(Text)
 
-        var description: String {
+        public var description: String {
             switch self {
             case .text(let text):
                 return text.content
@@ -17,11 +23,12 @@ extension RichText: Decodable {
         }
     }
 
-    struct Annotations: Decodable, Equatable {
-        let bold: Bool
-        let italic: Bool
-        let strikethrough: Bool
-        let underline: Bool
+    @PublicInit
+    struct Annotations: Codable, Equatable {
+        public let bold: Bool
+        public let italic: Bool
+        public let strikethrough: Bool
+        public let underline: Bool
         let code: Bool
     }
 }
@@ -36,7 +43,7 @@ extension RichText {
         }
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         let type = try container.decode(CodingKeys.Types.self, forKey: .type)
@@ -49,17 +56,31 @@ extension RichText {
 
         self.annotations = try container.decode(Annotations.self, forKey: .annotations)
     }
+
+    public func encode(to encoder: any Encoder) throws {
+        var container = try encoder.container(keyedBy: CodingKeys.self)
+
+        var typesContainer = try encoder.container(keyedBy: CodingKeys.Types.self)
+        switch self.type {
+        case .text(let text):
+            try container.encode(CodingKeys.Types.text.rawValue, forKey: .type)
+            try typesContainer.encode(text, forKey: .text)
+        }
+
+        try container.encode(annotations, forKey: .annotations)
+    }
 }
 
-extension RichText.Types {
-    struct Text: Decodable, Equatable {
+public extension RichText.Types {
+    @PublicInit
+    struct Text: Codable, Equatable {
         let content: String
         let link: Link?
     }
 }
 
-extension RichText.Types.Text {
-    struct Link: Decodable, Equatable {
+public extension RichText.Types.Text {
+    struct Link: Codable, Equatable {
         let url: URL
     }
 }

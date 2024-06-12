@@ -1,8 +1,8 @@
 import MacrosInterface
 
-extension Block {
+public extension Block {
     @CodingKeys(using: .snake_case)
-    struct BulletedListItem: Decodable {
+    struct BulletedListItem: Codable, Equatable {
         let richText: [RichText]
         let children: [Block]?
     }
