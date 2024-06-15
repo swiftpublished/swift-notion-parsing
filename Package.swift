@@ -1,6 +1,7 @@
 // swift-tools-version: 5.9
 
 import PackageDescription
+import class Foundation.ProcessInfo
 
 let package = Package(
     name: "swift-notion-parsing",
@@ -12,10 +13,6 @@ let package = Package(
             name: "NotionParsing",
             targets: ["NotionParsing"]
         )
-    ],
-    dependencies: [
-        .package(path: "../swift-macros")
-//        .package(url: "https://github.com/swiftpublished/swift-macros.git", branch: "main")
     ],
     targets: [
         .target(
@@ -32,3 +29,16 @@ let package = Package(
         )
     ]
 )
+
+/// Local Development Setup
+///
+/// We can set `CI_ENVIRONMENT` in `fly.io` to fetch from Remote
+if ProcessInfo.processInfo.environment["CI_ENVIRONMENT"] == "YES" {
+    package.dependencies += [
+        .package(url: "https://github.com/swiftpublished/swift-macros.git", branch: "main")
+    ]
+} else {
+    package.dependencies += [
+        .package(path: "../swift-macros")
+    ]
+}
