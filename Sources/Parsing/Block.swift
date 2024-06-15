@@ -47,12 +47,12 @@ extension Block: Codable {
     }
 
     public func encode(to encoder: any Encoder) throws {
-        var container = try encoder.container(keyedBy: CodingKeys.self)
+        var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(id, forKey: .id)
         try container.encode(hasChildren, forKey: .has_children)
 
-        var typesContainer = try encoder.container(keyedBy: CodingKeys.Types.self)
+        var typesContainer = encoder.container(keyedBy: CodingKeys.Types.self)
         switch self.type {
         case .paragraph(let paragraph):
             try container.encode(CodingKeys.Types.paragraph.rawValue, forKey: .type)

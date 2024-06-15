@@ -58,9 +58,9 @@ extension RichText {
     }
 
     public func encode(to encoder: any Encoder) throws {
-        var container = try encoder.container(keyedBy: CodingKeys.self)
+        var container = encoder.container(keyedBy: CodingKeys.self)
 
-        var typesContainer = try encoder.container(keyedBy: CodingKeys.Types.self)
+        var typesContainer = encoder.container(keyedBy: CodingKeys.Types.self)
         switch self.type {
         case .text(let text):
             try container.encode(CodingKeys.Types.text.rawValue, forKey: .type)
