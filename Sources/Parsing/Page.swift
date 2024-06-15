@@ -19,13 +19,12 @@ public struct Page: Codable, Equatable {
         @CodingKeys
         public struct Title: Codable, Equatable {
             @CodingKey(name: "title")
-            public let text: String
+            public let richTexts: [RichText]
 
             public init(from decoder: Decoder) throws {
                 let container = try decoder.container(keyedBy: CodingKeys.self)
 
-                let texts = try container.decode([RichText].self, forKey: .text)
-                self.text = texts.map(\.type.description).joined()
+                self.richTexts = try container.decode([RichText].self, forKey: .richTexts)
             }
         }
     }
