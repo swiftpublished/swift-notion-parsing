@@ -1,7 +1,7 @@
 import MacrosInterface
 
 @PublicInit
-public struct Block: Equatable {
+public struct Block: Equatable, Identifiable {
     public let id: String
     public let hasChildren: Bool
     public let type: Types
