@@ -7,7 +7,7 @@ final class RichTextTests: XCTestCase {
         {
             "type": "text",
             "text": {
-                "content": "This is an ",
+                "content": "Paragraph",
                 "link": null
             },
             "annotations": {
@@ -20,15 +20,7 @@ final class RichTextTests: XCTestCase {
         }
         """
 
-        let text = RichText.Types.Text(content: "This is an ", link: nil)
-        let annotations = RichText.Annotations(
-            bold: false,
-            italic: false,
-            strikethrough: false,
-            underline: false,
-            code: false
-        )
-        let expected = RichText(type: .text(text), annotations: annotations)
+        let expected: RichText = .text("Paragraph")
 
         try assert(decoding: json, to: expected)
     }
@@ -38,9 +30,9 @@ final class RichTextTests: XCTestCase {
         {
             "type": "text",
             "text": {
-                "content": "This is an ",
+                "content": "Paragraph",
                 "link": {
-                    "url": "https://developers.notion.com/"
+                    "url": "https://developers.notion.com"
                 }
             },
             "annotations": {
@@ -53,17 +45,33 @@ final class RichTextTests: XCTestCase {
         }
         """
 
-        let link = RichText.Types.Text.Link(url: URL(string: "https://developers.notion.com/")!)
-        let text = RichText.Types.Text(content: "This is an ", link: link)
-        let annotations = RichText.Annotations(
+        let expected: RichText = .text("Paragraph", link: "https://developers.notion.com")
+
+        try assert(decoding: json, to: expected)
+    }
+}
+
+extension RichText {
+    static func text(_ text: String) -> Self {
+        let text = RichText.Types.Text(content: text, link: nil)
+        return RichText(type: .text(text), annotations: .normal)
+    }
+
+    static func text(_ text: String, link: String) -> Self {
+        let link = RichText.Types.Text.Link(url: URL(string: link)!)
+        let text = RichText.Types.Text(content: text, link: link)
+        return RichText(type: .text(text), annotations: .normal)
+    }
+}
+
+extension RichText.Annotations {
+    static var normal: Self {
+        Self(
             bold: false,
             italic: false,
             strikethrough: false,
             underline: false,
             code: false
         )
-        let expected = RichText(type: .text(text), annotations: annotations)
-
-        try assert(decoding: json, to: expected)
     }
 }
