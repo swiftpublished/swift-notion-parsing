@@ -21,8 +21,7 @@ final class PageTests: XCTestCase {
                                 "italic": false,
                                 "strikethrough": false,
                                 "underline": false,
-                                "code": false,
-                                "color": "default"
+                                "code": false
                             }
                         }
                     ]
