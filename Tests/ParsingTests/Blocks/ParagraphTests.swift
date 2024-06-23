@@ -76,12 +76,9 @@ final class ParagraphTests: XCTestCase {
         }
         """
 
-        let childParagraph = Block.Paragraph(richTexts: [.text("1-1")], children: nil)
-        let childBlock = Block(
+        let childBlock: Block = .paragraph(
             id: "88ac35b2-7928-4229-8f6a-db802d3f498e",
-            hasChildren: false,
-            type: .paragraph(childParagraph),
-            children: nil
+            paragraphRichTexts: [.text("1-1")]
         )
 
         let expected = Block.Paragraph(richTexts: [.text("1")], children: [childBlock])
@@ -112,7 +109,7 @@ final class ParagraphTests: XCTestCase {
                 {
                     "id": "88ac35b2-7928-4229-8f6a-db802d3f498e",
                     "type": "paragraph",
-                    "has_children": true,
+                    "has_children": false,
                     "paragraph": {
                         "rich_text": [
                             {
@@ -161,20 +158,15 @@ final class ParagraphTests: XCTestCase {
         }
         """
 
-        let nestedChildParagraph = Block.Paragraph(richTexts: [.text("1-1-1")], children: nil)
-        let nestedChildBlock = Block(
+        let nestedChildBlock: Block = .paragraph(
             id: "9a3fbedd-070d-4c9c-8206-af688e62031e",
-            hasChildren: false,
-            type: .paragraph(nestedChildParagraph),
-            children: nil
+            paragraphRichTexts: [.text("1-1-1")]
         )
 
-        let childParagraph = Block.Paragraph(richTexts: [.text("1-1")], children: [nestedChildBlock])
-        let childBlock = Block(
+        let childBlock: Block = .paragraph(
             id: "88ac35b2-7928-4229-8f6a-db802d3f498e",
-            hasChildren: true,
-            type: .paragraph(childParagraph),
-            children: nil
+            paragraphRichTexts: [.text("1-1")],
+            paragraphChildren: [nestedChildBlock]
         )
 
         let expected = Block.Paragraph(richTexts: [.text("1")], children: [childBlock])

@@ -48,6 +48,7 @@ extension Block: Codable {
         }
 
         self.level = try container.decodeIfPresent(Int.self, forKey: .level)
+        self.children = try container.decodeIfPresent([Block].self, forKey: .children)
     }
 
     public func encode(to encoder: any Encoder) throws {
