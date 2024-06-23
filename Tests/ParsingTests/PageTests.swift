@@ -63,7 +63,7 @@ private extension Page {
         let title = Page.Properties.Title(richTexts: richTexts)
         let properties = Page.Properties(title: title)
 
-        let block: Block = .paragraph(id: blockId, paragraphRichTexts: paragraph)
+        let block: Block = .paragraph(id: blockId, paragraph: paragraph)
         let content = Content(nextCursor: nil, hasMore: false, blocks: [block])
 
         return Page(
