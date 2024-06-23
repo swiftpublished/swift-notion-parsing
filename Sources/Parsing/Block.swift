@@ -5,6 +5,7 @@ public struct Block: Equatable, Identifiable {
     public let id: String
     public let hasChildren: Bool
     public let type: Types
+    public var level: Int?
     public var children: [Block]?
 }
 
@@ -21,6 +22,7 @@ extension Block: Codable {
         case type
         case has_children
         case children
+        case level
 
         enum Types: String, CodingKey, Decodable {
             case bulleted_list_item
@@ -44,6 +46,8 @@ extension Block: Codable {
             let paragraph = try typesContainer.decode(Paragraph.self, forKey: .paragraph)
             self.type = .paragraph(paragraph)
         }
+
+        self.level = try container.decodeIfPresent(Int.self, forKey: .level)
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -62,6 +66,7 @@ extension Block: Codable {
             try typesContainer.encode(bulletedListItem, forKey: .bulleted_list_item)
         }
 
+        try container.encodeIfPresent(level, forKey: .level)
         try container.encodeIfPresent(children, forKey: .children)
     }
 }
