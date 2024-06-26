@@ -52,9 +52,9 @@ final class RichTextTests: XCTestCase {
 }
 
 extension RichText {
-    static func text(_ text: String) -> Self {
+    static func text(_ text: String, annotations: RichText.Annotations? = .normal) -> Self {
         let text = RichText.Types.Text(content: text, link: nil)
-        return RichText(type: .text(text), annotations: .normal)
+        return RichText(type: .text(text), annotations: annotations)
     }
 
     static func text(_ text: String, link: String) -> Self {
@@ -73,5 +73,8 @@ extension RichText.Annotations {
             underline: false,
             code: false
         )
+    }
+    static var none: Self? {
+        return nil
     }
 }
