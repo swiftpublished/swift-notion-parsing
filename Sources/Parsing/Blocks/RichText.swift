@@ -5,7 +5,7 @@ public struct RichText: Equatable, Codable {
     public let type: Types
     public let annotations: Annotations?
 
-    public init(type: Types, annotations: Annotations? = .none) {
+    public init(type: Types, annotations: Annotations? = nil) {
         self.type = type
         self.annotations = annotations
     }
