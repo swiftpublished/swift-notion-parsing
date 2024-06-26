@@ -13,6 +13,7 @@ public extension Block {
     enum Types: Codable, Equatable {
         case paragraph(Paragraph)
         case bulletedListItem(BulletedListItem)
+        case heading1(Heading1)
     }
 }
 
@@ -27,6 +28,7 @@ extension Block: Codable {
         enum Types: String, CodingKey, Decodable {
             case bulleted_list_item
             case paragraph
+            case heading_1
         }
     }
 
@@ -45,6 +47,9 @@ extension Block: Codable {
         case .paragraph:
             let paragraph = try typesContainer.decode(Paragraph.self, forKey: .paragraph)
             self.type = .paragraph(paragraph)
+        case .heading_1:
+            let heading1 = try typesContainer.decode(Heading1.self, forKey: .heading_1)
+            self.type = .heading1(heading1)
         }
 
         self.level = try container.decodeIfPresent(Int.self, forKey: .level)
@@ -65,6 +70,9 @@ extension Block: Codable {
         case .bulletedListItem(let bulletedListItem):
             try container.encode(CodingKeys.Types.bulleted_list_item.rawValue, forKey: .type)
             try typesContainer.encode(bulletedListItem, forKey: .bulleted_list_item)
+        case .heading1(let heading1):
+            try container.encode(CodingKeys.Types.heading_1.rawValue, forKey: .type)
+            try typesContainer.encode(heading1, forKey: .heading_1)
         }
 
         try container.encodeIfPresent(level, forKey: .level)
