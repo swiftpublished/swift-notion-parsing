@@ -3,9 +3,9 @@ import MacrosInterface
 
 public struct RichText: Equatable, Codable {
     public let type: Types
-    public let annotations: Annotations?
+    public let annotations: Annotations
 
-    public init(type: Types, annotations: Annotations? = nil) {
+    public init(type: Types, annotations: Annotations) {
         self.type = type
         self.annotations = annotations
     }
@@ -25,11 +25,11 @@ public extension RichText {
 
     @PublicInit
     struct Annotations: Codable, Equatable {
-        public let bold: Bool?
-        public let italic: Bool?
-        public let strikethrough: Bool?
-        public let underline: Bool?
-        let code: Bool?
+        public let bold: Bool
+        public let italic: Bool
+        public let strikethrough: Bool
+        public let underline: Bool
+        let code: Bool
     }
 }
 
@@ -54,7 +54,7 @@ extension RichText {
             self.type = .text(text)
         }
 
-        self.annotations = try container.decodeIfPresent(Annotations.self, forKey: .annotations)
+        self.annotations = try container.decode(Annotations.self, forKey: .annotations)
     }
 
     public func encode(to encoder: any Encoder) throws {

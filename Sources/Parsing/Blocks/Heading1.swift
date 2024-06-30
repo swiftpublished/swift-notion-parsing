@@ -6,7 +6,7 @@ public extension Block {
     struct Heading1: Codable, Equatable {
         @CodingKey(name: "rich_text")
         public let richTexts: [RichText]
-        @CodingKey(name: "is_toggleable")
+
         public let isToggleable: Bool
     }
 }
