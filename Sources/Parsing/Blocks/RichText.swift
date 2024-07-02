@@ -80,6 +80,7 @@ public extension RichText.Types {
 }
 
 public extension RichText.Types.Text {
+    @PublicInit
     struct Link: Codable, Equatable {
         let url: URL
     }

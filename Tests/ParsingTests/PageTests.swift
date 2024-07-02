@@ -1,4 +1,5 @@
 @testable import NotionParsing
+@testable import NotionParsingTestHelpers
 import XCTest
 
 final class PageTests: XCTestCase {
@@ -37,40 +38,5 @@ final class PageTests: XCTestCase {
         )
 
         try assert(decoding: json, to: expected)
-    }
-}
-
-private extension Page {
-    static func noContent(id: String, lastEditedTime: String, title richTexts: [RichText]) -> Self {
-        let title = Page.Properties.Title(richTexts: richTexts)
-        let properties = Page.Properties(title: title)
-
-        return Page(
-            id: UUID(uuidString: id)!,
-            lastEditedTime: DateFormatter.iso8601Notion.date(from: lastEditedTime)!,
-            properties: properties,
-            content: nil
-        )
-    }
-
-    static func paragraphContent(
-        id: String, 
-        lastEditedTime: String,
-        title richTexts: [RichText],
-        blockId: String,
-        paragraph: [RichText]
-    ) -> Self {
-        let title = Page.Properties.Title(richTexts: richTexts)
-        let properties = Page.Properties(title: title)
-
-        let block: Block = .paragraph(id: blockId, paragraph: paragraph)
-        let content = Content(nextCursor: nil, hasMore: false, blocks: [block])
-
-        return Page(
-            id: UUID(uuidString: id)!,
-            lastEditedTime: DateFormatter.iso8601Notion.date(from: lastEditedTime)!,
-            properties: properties,
-            content: content
-        )
     }
 }

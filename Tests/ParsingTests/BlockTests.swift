@@ -1,4 +1,5 @@
 @testable import NotionParsing
+@testable import NotionParsingTestHelpers
 import XCTest
 
 final class BlockTests: XCTestCase {
@@ -207,26 +208,5 @@ final class BlockTests: XCTestCase {
         )
 
         try assert(decoding: json, to: expected)
-    }
-}
-
-extension Block {
-    static func paragraph(
-        id: String,
-        hasChildren: Bool = false,
-        level: Int? = nil,
-        paragraph: [RichText],
-        paragraphChildren: [Block]? = nil,
-        blockChildren: [Block]? = nil
-    ) -> Self {
-        let paragraph = Block.Paragraph(richTexts: paragraph, children: paragraphChildren)
-        let block = Block(
-            id: id,
-            hasChildren: hasChildren,
-            type: .paragraph(paragraph),
-            level: level,
-            children: blockChildren
-        )
-        return block
     }
 }

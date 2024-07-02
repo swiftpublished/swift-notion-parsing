@@ -12,6 +12,10 @@ let package = Package(
         .library(
             name: "NotionParsing",
             targets: ["NotionParsing"]
+        ),
+        .library(
+            name: "NotionParsingTestHelpers",
+            targets: ["NotionParsingTestHelpers"]
         )
     ],
     targets: [
@@ -22,9 +26,14 @@ let package = Package(
             ],
             path: "Sources/Parsing"
         ),
+        .target(
+            name: "NotionParsingTestHelpers",
+            dependencies: ["NotionParsing"],
+            path: "Sources/ParsingTestHelpers"
+        ),
         .testTarget(
             name: "NotionParsingTests",
-            dependencies: ["NotionParsing"],
+            dependencies: ["NotionParsing", "NotionParsingTestHelpers"],
             path: "Tests/ParsingTests"
         )
     ]

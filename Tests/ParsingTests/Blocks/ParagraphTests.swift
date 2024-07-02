@@ -1,4 +1,5 @@
 @testable import NotionParsing
+@testable import NotionParsingTestHelpers
 import XCTest
 
 final class ParagraphTests: XCTestCase {
