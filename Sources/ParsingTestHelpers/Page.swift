@@ -3,7 +3,7 @@ import NotionParsing
 
 extension Page {
     static func noContent(
-        id: String = "00000000-0000-0000-0000-000000000000",
+        id: String = UUID.zeros.uuidString,
         lastEditedTime: String = "2024-01-01T00:00:00.000Z",
         title richTexts: [RichText]
     ) -> Self {
@@ -19,10 +19,10 @@ extension Page {
     }
 
     static func paragraphContent(
-        id: String,
-        lastEditedTime: String,
+        id: String = UUID.zeros.uuidString,
+        lastEditedTime: String = "2024-01-01T00:00:00.000Z",
         title richTexts: [RichText],
-        blockId: String,
+        blockId: String = UUID.ones.uuidString,
         paragraph: [RichText]
     ) -> Self {
         let title = Page.Properties.Title(richTexts: richTexts)
