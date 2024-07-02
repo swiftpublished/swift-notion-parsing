@@ -11,9 +11,11 @@ public struct Block: Equatable, Identifiable {
 
 public extension Block {
     enum Types: Codable, Equatable {
-        case paragraph(Paragraph)
         case bulletedListItem(BulletedListItem)
-        case heading1(Heading1)
+        case heading1(Heading)
+        case heading2(Heading)
+        case heading3(Heading)
+        case paragraph(Paragraph)
     }
 }
 
@@ -27,8 +29,10 @@ extension Block: Codable {
 
         enum Types: String, CodingKey, Decodable {
             case bulleted_list_item
-            case paragraph
             case heading_1
+            case heading_2
+            case heading_3
+            case paragraph
         }
     }
 
@@ -44,12 +48,18 @@ extension Block: Codable {
         case .bulleted_list_item:
             let bulletedListItem = try typesContainer.decode(BulletedListItem.self, forKey: .bulleted_list_item)
             self.type = .bulletedListItem(bulletedListItem)
+        case .heading_1:
+            let heading = try typesContainer.decode(Heading.self, forKey: .heading_1)
+            self.type = .heading1(heading)
+        case .heading_2:
+            let heading = try typesContainer.decode(Heading.self, forKey: .heading_2)
+            self.type = .heading2(heading)
+        case .heading_3:
+            let heading = try typesContainer.decode(Heading.self, forKey: .heading_3)
+            self.type = .heading3(heading)
         case .paragraph:
             let paragraph = try typesContainer.decode(Paragraph.self, forKey: .paragraph)
             self.type = .paragraph(paragraph)
-        case .heading_1:
-            let heading1 = try typesContainer.decode(Heading1.self, forKey: .heading_1)
-            self.type = .heading1(heading1)
         }
 
         self.level = try container.decodeIfPresent(Int.self, forKey: .level)
@@ -64,15 +74,21 @@ extension Block: Codable {
 
         var typesContainer = encoder.container(keyedBy: CodingKeys.Types.self)
         switch self.type {
-        case .paragraph(let paragraph):
-            try container.encode(CodingKeys.Types.paragraph.rawValue, forKey: .type)
-            try typesContainer.encode(paragraph, forKey: .paragraph)
         case .bulletedListItem(let bulletedListItem):
             try container.encode(CodingKeys.Types.bulleted_list_item.rawValue, forKey: .type)
             try typesContainer.encode(bulletedListItem, forKey: .bulleted_list_item)
         case .heading1(let heading1):
             try container.encode(CodingKeys.Types.heading_1.rawValue, forKey: .type)
             try typesContainer.encode(heading1, forKey: .heading_1)
+        case .heading2(let heading2):
+            try container.encode(CodingKeys.Types.heading_2.rawValue, forKey: .type)
+            try typesContainer.encode(heading2, forKey: .heading_2)
+        case .heading3(let heading3):
+            try container.encode(CodingKeys.Types.heading_3.rawValue, forKey: .type)
+            try typesContainer.encode(heading3, forKey: .heading_3)
+        case .paragraph(let paragraph):
+            try container.encode(CodingKeys.Types.paragraph.rawValue, forKey: .type)
+            try typesContainer.encode(paragraph, forKey: .paragraph)
         }
 
         try container.encodeIfPresent(level, forKey: .level)

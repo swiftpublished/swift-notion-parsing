@@ -1,3 +1,4 @@
+import Foundation
 import NotionParsing
 
 extension Block {
@@ -21,9 +22,18 @@ extension Block {
     }
 
     static func paragraph(_ paragraph: [RichText]) -> Self {
-        .paragraph(
-            id: "00000000-0000-0000-0000-000000000000",
-            paragraph: paragraph
+        .paragraph(id: UUID.zeros.uuidString, paragraph: paragraph)
+    }
+
+    static func heading1(id: String, heading1: [RichText]) -> Self {
+        let heading1 = Block.Heading(richTexts: heading1, isToggleable: false)
+        let block = Block(
+            id: id,
+            hasChildren: false,
+            type: .heading1(heading1),
+            level: nil,
+            children: nil
         )
+        return block
     }
 }
