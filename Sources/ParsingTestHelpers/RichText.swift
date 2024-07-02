@@ -35,6 +35,16 @@ extension RichText.Annotations {
         )
     }
 
+    static var italic: Self {
+        Self(
+            bold: false,
+            italic: true,
+            strikethrough: false,
+            underline: false,
+            code: false
+        )
+    }
+
     static var bold_and_italic: Self {
         Self(
             bold: true,
