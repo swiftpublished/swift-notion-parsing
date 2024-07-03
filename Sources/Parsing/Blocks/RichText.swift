@@ -74,14 +74,14 @@ extension RichText {
 public extension RichText.Types {
     @PublicInit
     struct Text: Codable, Equatable {
-        let content: String
-        let link: Link?
+        public let content: String
+        public let link: Link?
     }
 }
 
 public extension RichText.Types.Text {
     @PublicInit
     struct Link: Codable, Equatable {
-        let url: URL
+        public let url: URL
     }
 }

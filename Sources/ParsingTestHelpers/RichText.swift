@@ -7,10 +7,10 @@ extension RichText {
         return RichText(type: .text(text), annotations: annotations)
     }
 
-    static func text(_ text: String, link: String) -> Self {
+    static func text(_ text: String, _ annotations: RichText.Annotations = .normal, link: String) -> Self {
         let link = RichText.Types.Text.Link(url: URL(string: link)!)
         let text = RichText.Types.Text(content: text, link: link)
-        return RichText(type: .text(text), annotations: .normal)
+        return RichText(type: .text(text), annotations: annotations)
     }
 }
 
