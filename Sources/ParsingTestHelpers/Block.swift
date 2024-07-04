@@ -36,4 +36,28 @@ extension Block {
         )
         return block
     }
+
+    static func externalImage(url: String, caption: [RichText]?) -> Self {
+        let image: Self.Image = .external(url: url, caption: caption)
+        let block = Block(
+            id: UUID.zeros.uuidString,
+            hasChildren: false,
+            type: .image(image),
+            level: nil,
+            children: nil
+        )
+        return block
+    }
+
+    static func notionImage(url: String, expiry: String) -> Self {
+        let image: Self.Image = .notion(url: url, expiry: expiry)
+        let block = Block(
+            id: UUID.zeros.uuidString,
+            hasChildren: false,
+            type: .image(image),
+            level: nil,
+            children: nil
+        )
+        return block
+    }
 }

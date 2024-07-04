@@ -7,6 +7,10 @@ public extension Block {
         public let caption: [RichText]?
         public let type: Types
 
+        public var alternateText: String? {
+            caption?.map(\.plainText).joined()
+        }
+
         enum CodingKeys: CodingKey {
             case caption
             case type
