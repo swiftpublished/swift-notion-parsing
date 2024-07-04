@@ -23,7 +23,8 @@ final class BlockTests: XCTestCase {
                             "underline": false,
                             "italic": false,
                             "strikethrough": false
-                        }
+                        },
+                        "plain_text": "Paragraph"
                     }
                 ]
             }
@@ -58,7 +59,8 @@ final class BlockTests: XCTestCase {
                             "underline": false,
                             "italic": false,
                             "strikethrough": false
-                        }
+                        },
+                        "plain_text": "1"
                     }
                 ]
             },
@@ -82,7 +84,8 @@ final class BlockTests: XCTestCase {
                                     "underline": false,
                                     "italic": false,
                                     "strikethrough": false
-                                }
+                                },
+                                "plain_text": "1-1"
                             }
                         ]
                     }
@@ -127,7 +130,8 @@ final class BlockTests: XCTestCase {
                             "underline": false,
                             "italic": false,
                             "strikethrough": false
-                        }
+                        },
+                        "plain_text": "1"
                     }
                 ]
             },
@@ -151,7 +155,8 @@ final class BlockTests: XCTestCase {
                                     "underline": false,
                                     "italic": false,
                                     "strikethrough": false
-                                }
+                                },
+                                "plain_text": "1-1"
                             }
                         ]
                     },
@@ -175,7 +180,8 @@ final class BlockTests: XCTestCase {
                                             "underline": false,
                                             "italic": false,
                                             "strikethrough": false
-                                        }
+                                        },
+                                        "plain_text": "1-1-1"
                                     }
                                 ]
                             }
@@ -230,7 +236,8 @@ final class BlockTests: XCTestCase {
                             "underline": false,
                             "italic": false,
                             "strikethrough": false
-                        }
+                        },
+                        "plain_text": "Heading 1"
                     }
                 ],
                 "is_toggleable": false

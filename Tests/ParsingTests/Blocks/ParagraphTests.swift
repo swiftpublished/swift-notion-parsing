@@ -19,7 +19,8 @@ final class ParagraphTests: XCTestCase {
                         "underline": false,
                         "italic": false,
                         "strikethrough": false
-                    }
+                    },
+                    "plain_text": "1"
                 }
             ]
         }
@@ -46,7 +47,8 @@ final class ParagraphTests: XCTestCase {
                         "underline": false,
                         "italic": false,
                         "strikethrough": false
-                    }
+                    },
+                    "plain_text": "1"
                 }
             ],
             "children": [
@@ -68,7 +70,8 @@ final class ParagraphTests: XCTestCase {
                                     "underline": false,
                                     "italic": false,
                                     "strikethrough": false
-                                }
+                                },
+                                "plain_text": "1-1"
                             }
                         ]
                     }
@@ -103,7 +106,8 @@ final class ParagraphTests: XCTestCase {
                         "underline": false,
                         "italic": false,
                         "strikethrough": false
-                    }
+                    },
+                    "plain_text": "1"
                 }
             ],
             "children": [
@@ -125,7 +129,8 @@ final class ParagraphTests: XCTestCase {
                                     "underline": false,
                                     "italic": false,
                                     "strikethrough": false
-                                }
+                                },
+                                "plain_text": "1-1"
                             }
                         ],
                         "children": [
@@ -147,7 +152,8 @@ final class ParagraphTests: XCTestCase {
                                                 "underline": false,
                                                 "italic": false,
                                                 "strikethrough": false
-                                            }
+                                            },
+                                            "plain_text": "1-1-1"
                                         }
                                     ]
                                 }

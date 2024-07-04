@@ -17,7 +17,8 @@ final class RichTextTests: XCTestCase {
                 "strikethrough": false,
                 "underline": false,
                 "code": false
-            }
+            },
+            "plain_text": "Paragraph"
         }
         """
 
@@ -42,7 +43,8 @@ final class RichTextTests: XCTestCase {
                 "strikethrough": false,
                 "underline": false,
                 "code": false
-            }
+            },
+            "plain_text": "Paragraph"
         }
         """
 

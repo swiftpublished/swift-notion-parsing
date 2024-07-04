@@ -23,7 +23,8 @@ final class PageTests: XCTestCase {
                                 "strikethrough": false,
                                 "underline": false,
                                 "code": false
-                            }
+                            },
+                            "plain_text": "Title"
                         }
                     ]
                 }

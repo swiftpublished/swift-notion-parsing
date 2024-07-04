@@ -4,10 +4,12 @@ import MacrosInterface
 public struct RichText: Equatable, Codable {
     public let type: Types
     public let annotations: Annotations
+    public let plainText: String
 
-    public init(type: Types, annotations: Annotations) {
+    public init(type: Types, annotations: Annotations, plainText: String) {
         self.type = type
         self.annotations = annotations
+        self.plainText = plainText
     }
 }
 
@@ -37,6 +39,7 @@ extension RichText {
     enum CodingKeys: CodingKey {
         case type
         case annotations
+        case plain_text
 
         enum Types: String, CodingKey, Decodable {
             case text
@@ -55,6 +58,7 @@ extension RichText {
         }
 
         self.annotations = try container.decode(Annotations.self, forKey: .annotations)
+        self.plainText = try container.decode(String.self, forKey: .plain_text)
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -67,7 +71,8 @@ extension RichText {
             try typesContainer.encode(text, forKey: .text)
         }
 
-        try container.encodeIfPresent(annotations, forKey: .annotations)
+        try container.encode(annotations, forKey: .annotations)
+        try container.encode(annotations, forKey: .annotations)
     }
 }
 

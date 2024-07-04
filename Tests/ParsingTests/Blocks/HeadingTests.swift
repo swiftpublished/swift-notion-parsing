@@ -19,7 +19,8 @@ final class HeadingTests: XCTestCase {
                         "strikethrough": false,
                         "underline": false,
                         "code": false
-                    }
+                    },
+                    "plain_text": "Heading"
                 }
             ],
             "is_toggleable": false
