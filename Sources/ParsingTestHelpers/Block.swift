@@ -60,4 +60,27 @@ extension Block {
         )
         return block
     }
+
+    static func quote(
+        id: String,
+        hasChildren: Bool = false,
+        level: Int? = nil,
+        quote: [RichText],
+        quoteChildren: [Block]? = nil,
+        blockChildren: [Block]? = nil
+    ) -> Self {
+        let quote = Block.Quote(richTexts: quote, children: quoteChildren)
+        let block = Block(
+            id: id,
+            hasChildren: hasChildren,
+            type: .quote(quote),
+            level: level,
+            children: blockChildren
+        )
+        return block
+    }
+
+    static func quote(_ quote: [RichText]) -> Self {
+        .quote(id: UUID.zeros.uuidString, quote: quote)
+    }
 }

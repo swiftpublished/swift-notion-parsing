@@ -17,6 +17,7 @@ public extension Block {
         case heading3(Heading)
         case image(Image)
         case paragraph(Paragraph)
+        case quote(Quote)
     }
 }
 
@@ -35,6 +36,7 @@ extension Block: Codable {
             case heading_3
             case image
             case paragraph
+            case quote
         }
     }
 
@@ -65,6 +67,9 @@ extension Block: Codable {
         case .paragraph:
             let paragraph = try typesContainer.decode(Paragraph.self, forKey: .paragraph)
             self.type = .paragraph(paragraph)
+        case .quote:
+            let quote = try typesContainer.decode(Quote.self, forKey: .quote)
+            self.type = .quote(quote)
         }
 
         self.level = try container.decodeIfPresent(Int.self, forKey: .level)
@@ -97,6 +102,9 @@ extension Block: Codable {
         case .paragraph(let paragraph):
             try container.encode(CodingKeys.Types.paragraph.rawValue, forKey: .type)
             try typesContainer.encode(paragraph, forKey: .paragraph)
+        case .quote(let quote):
+            try container.encode(CodingKeys.Types.quote.rawValue, forKey: .type)
+            try typesContainer.encode(quote, forKey: .quote)
         }
 
         try container.encodeIfPresent(level, forKey: .level)
