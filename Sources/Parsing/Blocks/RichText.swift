@@ -72,7 +72,7 @@ extension RichText {
         }
 
         try container.encode(annotations, forKey: .annotations)
-        try container.encode(annotations, forKey: .annotations)
+        try container.encode(plainText, forKey: .plain_text)
     }
 }
 
