@@ -29,7 +29,7 @@ final class QuoteTests: XCTestCase {
             }
         """
 
-        let expected = Block.Paragraph(richTexts: [.text("Bringing ideas to life, one line of code at a time.")], children: nil)
+        let expected = Block.Quote(richTexts: [.text("Bringing ideas to life, one line of code at a time.")], children: nil)
 
         try assert(decoding: json, to: expected)
     }
