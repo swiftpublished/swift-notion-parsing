@@ -4,7 +4,7 @@ public extension Block {
     @PublicInit
     @CodingKeys
     struct Code: Codable, Equatable {
-        public let caption: [RichText]
+        public let caption: [RichText]?
 
         @CodingKey(name: "rich_text")
         public let richTexts: [RichText]
