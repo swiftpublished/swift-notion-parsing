@@ -12,6 +12,7 @@ public struct Block: Equatable, Identifiable {
 public extension Block {
     enum Types: Codable, Equatable {
         case bulletedListItem(BulletedListItem)
+        case code(Code)
         case heading1(Heading)
         case heading2(Heading)
         case heading3(Heading)
@@ -31,6 +32,7 @@ extension Block: Codable {
 
         enum Types: String, CodingKey, Decodable {
             case bulleted_list_item
+            case code
             case heading_1
             case heading_2
             case heading_3
@@ -52,6 +54,9 @@ extension Block: Codable {
         case .bulleted_list_item:
             let bulletedListItem = try typesContainer.decode(BulletedListItem.self, forKey: .bulleted_list_item)
             self.type = .bulletedListItem(bulletedListItem)
+        case .code:
+            let code = try typesContainer.decode(Code.self, forKey: .code)
+            self.type = .code(code)
         case .heading_1:
             let heading = try typesContainer.decode(Heading.self, forKey: .heading_1)
             self.type = .heading1(heading)
@@ -87,6 +92,9 @@ extension Block: Codable {
         case .bulletedListItem(let bulletedListItem):
             try container.encode(CodingKeys.Types.bulleted_list_item.rawValue, forKey: .type)
             try typesContainer.encode(bulletedListItem, forKey: .bulleted_list_item)
+        case .code(let code):
+            try container.encode(CodingKeys.Types.code.rawValue, forKey: .type)
+            try typesContainer.encode(code, forKey: .code)
         case .heading1(let heading1):
             try container.encode(CodingKeys.Types.heading_1.rawValue, forKey: .type)
             try typesContainer.encode(heading1, forKey: .heading_1)
