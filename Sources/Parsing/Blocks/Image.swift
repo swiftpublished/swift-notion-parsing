@@ -4,11 +4,40 @@ import MacrosInterface
 public extension Block {
     @PublicInit
     struct Image: Codable, Equatable {
+        public let file: File
+
+        public init(from decoder: Decoder) throws {
+            self.file = try File(from: decoder)
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            try file.encode(to: encoder)
+        }
+    }
+}
+
+public extension Block {
+    @PublicInit
+    struct File: Codable, Equatable {
         public let caption: [RichText]?
         public let type: Types
 
         public var alternateText: String? {
             caption?.map(\.plainText).joined()
+        }
+
+        public enum Types: Codable, Equatable {
+            case notion(NotionHosted)
+            case external(External)
+
+            public var url: URL {
+                switch self {
+                case .notion(let file):
+                    file.url
+                case .external(let file):
+                    file.url
+                }
+            }
         }
 
         enum CodingKeys: CodingKey {
@@ -30,10 +59,10 @@ public extension Block {
             let typesContainer = try decoder.container(keyedBy: CodingKeys.Types.self)
             switch type {
             case .file:
-                let file = try typesContainer.decode(Types.NotionHostedFile.self, forKey: .file)
-                self.type = .file(file)
+                let file = try typesContainer.decode(NotionHosted.self, forKey: .file)
+                self.type = .notion(file)
             case .external:
-                let file = try typesContainer.decode(Types.ExternalFile.self, forKey: .external)
+                let file = try typesContainer.decode(External.self, forKey: .external)
                 self.type = .external(file)
             }
         }
@@ -45,7 +74,7 @@ public extension Block {
 
             var typesContainer = encoder.container(keyedBy: CodingKeys.Types.self)
             switch self.type {
-            case .file(let file):
+            case .notion(let file):
                 try container.encode(CodingKeys.Types.file.rawValue, forKey: .type)
                 try typesContainer.encode(file, forKey: .file)
             case .external(let file):
@@ -54,21 +83,16 @@ public extension Block {
             }
         }
 
-        public enum Types: Codable, Equatable {
-            case file(NotionHostedFile)
-            case external(ExternalFile)
+        @PublicInit
+        @CodingKeys(using: .snake_case)
+        public struct NotionHosted: Codable, Equatable {
+            let url: URL
+            let expiryTime: Date
+        }
 
-            @PublicInit
-            @CodingKeys(using: .snake_case)
-            public struct NotionHostedFile: Codable, Equatable {
-                let url: URL
-                let expiryTime: Date
-            }
-
-            @PublicInit
-            public struct ExternalFile: Codable, Equatable {
-                public let url: URL
-            }
+        @PublicInit
+        public struct External: Codable, Equatable {
+            public let url: URL
         }
     }
 }

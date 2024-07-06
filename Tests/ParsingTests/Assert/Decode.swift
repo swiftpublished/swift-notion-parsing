@@ -1,6 +1,6 @@
-@testable import NotionParsing
 import Foundation
 import XCTest
+@testable import NotionParsing
 
 func assert<T>(
     decoding json: String,
@@ -10,8 +10,7 @@ func assert<T>(
     line: UInt = #line
 ) throws where T: Decodable, T: Equatable {
     let data = json.data(using: .utf8)!
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .formatted(.iso8601Notion)
+    let decoder = JSONDecoder.notion
     let decoded = try decoder.decode(T.self, from: data)
 
     XCTAssertEqual(decoded, expected(), message(), file: file, line: line)
