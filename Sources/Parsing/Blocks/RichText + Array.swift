@@ -1,5 +1,5 @@
 public extension Array where Element == RichText {
-    var text: String {
+    var plainTexts: String {
         map(\.plainText).joined()
     }
 }
