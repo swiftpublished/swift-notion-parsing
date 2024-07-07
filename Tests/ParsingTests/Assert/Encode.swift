@@ -11,13 +11,7 @@ func assert<T>(
 ) throws where T: Codable, T: Equatable {
     let encoder = JSONEncoder.notion
     let encoded = try encoder.encode(data)
+    let json = String(data: encoded, encoding: .utf8)!
 
-    let decoder = JSONDecoder.notion
-
-    let encodedT = try decoder.decode(T.self, from: encoded)
-
-    let expectedData = expected().data(using: .utf8)!
-    let expectedT = try decoder.decode(T.self, from: expectedData)
-
-    XCTAssertEqual(encodedT, expectedT, message(), file: file, line: line)
+    XCTAssertEqual(json, expected(), message(), file: file, line: line)
 }

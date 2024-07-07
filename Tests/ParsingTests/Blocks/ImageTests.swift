@@ -45,11 +45,11 @@ final class ImageTests: XCTestCase {
 
         let expected: String = """
         {
-            "type": "file",
-            "file": {
-                "url": "https://host.com/image.png",
-                "expiry_time": "2024-07-04T05:37:43.648Z"
-            }
+          "file" : {
+            "expiry_time" : "2024-07-04T05:37:43.648Z",
+            "url" : "https://host.com/image.png"
+          },
+          "type" : "file"
         }
         """
 
@@ -61,10 +61,10 @@ final class ImageTests: XCTestCase {
 
         let expected: String = """
         {
-            "type": "external",
-            "external": {
-                "url": "https://host.com/image.png"
-            }
+          "external" : {
+            "url" : "https://host.com/image.png"
+          },
+          "type" : "external"
         }
         """
 

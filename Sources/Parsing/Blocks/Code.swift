@@ -16,9 +16,3 @@ public extension Block {
         }
     }
 }
-
-public extension Block.Code {
-    var plainText: String {
-        richTexts.map(\.plainText).joined()
-    }
-}

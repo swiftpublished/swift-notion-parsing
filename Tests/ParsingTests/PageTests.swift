@@ -9,7 +9,7 @@ final class PageTests: XCTestCase {
             "id": "59833787-2cf9-4fdf-8782-e53db20768a5",
             "last_edited_time": "2020-03-17T19:10:04.968Z",
             "properties": {
-                "Name": {
+                "title": {
                     "title": [
                         {
                             "type": "text",

@@ -23,7 +23,7 @@ public extension Block {
         public let type: Types
 
         public var alternateText: String? {
-            caption?.map(\.plainText).joined()
+            caption?.text
         }
 
         public enum Types: Codable, Equatable {
