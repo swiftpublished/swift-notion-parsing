@@ -12,7 +12,6 @@ public struct Page: Codable, Equatable {
     @PublicInit
     @CodingKeys
     public struct Properties: Codable, Equatable {
-        @CodingKey(name: "Name")
         public let title: Title
 
         @PublicInit
