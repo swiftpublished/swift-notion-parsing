@@ -19,6 +19,7 @@ public extension Block {
         case image(Image)
         case paragraph(Paragraph)
         case quote(Quote)
+        case video(Video)
     }
 }
 
@@ -39,6 +40,7 @@ extension Block: Codable {
             case image
             case paragraph
             case quote
+            case video
         }
     }
 
@@ -75,6 +77,9 @@ extension Block: Codable {
         case .quote:
             let quote = try typesContainer.decode(Quote.self, forKey: .quote)
             self.type = .quote(quote)
+        case .video:
+            let video = try typesContainer.decode(Video.self, forKey: .video)
+            self.type = .video(video)
         }
 
         self.level = try container.decodeIfPresent(Int.self, forKey: .level)
@@ -113,6 +118,9 @@ extension Block: Codable {
         case .quote(let quote):
             try container.encode(CodingKeys.Types.quote.rawValue, forKey: .type)
             try typesContainer.encode(quote, forKey: .quote)
+        case .video(let video):
+            try container.encode(CodingKeys.Types.video.rawValue, forKey: .type)
+            try typesContainer.encode(video, forKey: .video)
         }
 
         try container.encodeIfPresent(level, forKey: .level)
