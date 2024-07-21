@@ -4,7 +4,7 @@ import NotionParsing
 extension Block.Image {
     static func notion(url: String, expiry: String) -> Self {
         let fileType = Block.File.NotionHosted(
-            url: URL(string: "https://host.com/image.png")!,
+            url: URL(string: url)!,
             expiryTime: DateFormatter.iso8601Notion.date(from: expiry)!
         )
         let file = Block.File(caption: nil, type: .notion(fileType))
@@ -14,9 +14,9 @@ extension Block.Image {
 
     static func external(url: String, caption: [RichText]?) -> Self {
         let fileType = Block.File.External(
-            url: URL(string: "https://host.com/image.png")!
+            url: URL(string: url)!
         )
-        let file = Block.File(caption: nil, type: .external(fileType))
+        let file = Block.File(caption: caption, type: .external(fileType))
 
         return Self(file: file)
     }

@@ -83,4 +83,16 @@ extension Block {
     static func quote(_ quote: [RichText]) -> Self {
         .quote(id: UUID.zeros.uuidString, quote: quote)
     }
+
+    static func externalVideo(url: String, caption: [RichText]?) -> Self {
+        let video: Self.Video = .external(url: url, caption: caption)
+        let block = Block(
+            id: UUID.zeros.uuidString,
+            hasChildren: false,
+            type: .video(video),
+            level: nil,
+            children: nil
+        )
+        return block
+    }
 }
