@@ -13,6 +13,7 @@ public extension Block {
     enum Types: Codable, Equatable {
         case bulletedListItem(BulletedListItem)
         case code(Code)
+        case embed(Embed)
         case heading1(Heading)
         case heading2(Heading)
         case heading3(Heading)
@@ -34,6 +35,7 @@ extension Block: Codable {
         enum Types: String, CodingKey, Decodable {
             case bulleted_list_item
             case code
+            case embed
             case heading_1
             case heading_2
             case heading_3
@@ -59,6 +61,9 @@ extension Block: Codable {
         case .code:
             let code = try typesContainer.decode(Code.self, forKey: .code)
             self.type = .code(code)
+        case .embed:
+            let embed = try typesContainer.decode(Embed.self, forKey: .embed)
+            self.type = .embed(embed)
         case .heading_1:
             let heading = try typesContainer.decode(Heading.self, forKey: .heading_1)
             self.type = .heading1(heading)
@@ -100,6 +105,9 @@ extension Block: Codable {
         case .code(let code):
             try container.encode(CodingKeys.Types.code.rawValue, forKey: .type)
             try typesContainer.encode(code, forKey: .code)
+        case .embed(let embed):
+            try container.encode(CodingKeys.Types.embed.rawValue, forKey: .type)
+            try typesContainer.encode(embed, forKey: .embed)
         case .heading1(let heading1):
             try container.encode(CodingKeys.Types.heading_1.rawValue, forKey: .type)
             try typesContainer.encode(heading1, forKey: .heading_1)
