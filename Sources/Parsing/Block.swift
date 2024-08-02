@@ -18,6 +18,7 @@ public extension Block {
         case heading2(Heading)
         case heading3(Heading)
         case image(Image)
+        case numberedListItem(NumberedListItem)
         case paragraph(Paragraph)
         case quote(Quote)
         case video(Video)
@@ -40,6 +41,7 @@ extension Block: Codable {
             case heading_2
             case heading_3
             case image
+            case numbered_list_item
             case paragraph
             case quote
             case video
@@ -76,6 +78,9 @@ extension Block: Codable {
         case .image:
             let image = try typesContainer.decode(Image.self, forKey: .image)
             self.type = .image(image)
+        case .numbered_list_item:
+            let numberedListItem = try typesContainer.decode(NumberedListItem.self, forKey: .numbered_list_item)
+            self.type = .numberedListItem(numberedListItem)
         case .paragraph:
             let paragraph = try typesContainer.decode(Paragraph.self, forKey: .paragraph)
             self.type = .paragraph(paragraph)
@@ -120,6 +125,9 @@ extension Block: Codable {
         case .image(let image):
             try container.encode(CodingKeys.Types.image.rawValue, forKey: .type)
             try typesContainer.encode(image, forKey: .image)
+        case .numberedListItem(let numberedListItem):
+            try container.encode(CodingKeys.Types.numbered_list_item.rawValue, forKey: .type)
+            try typesContainer.encode(numberedListItem, forKey: .numbered_list_item)
         case .paragraph(let paragraph):
             try container.encode(CodingKeys.Types.paragraph.rawValue, forKey: .type)
             try typesContainer.encode(paragraph, forKey: .paragraph)

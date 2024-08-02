@@ -95,4 +95,23 @@ extension Block {
         )
         return block
     }
+
+    static func numberedListItem(
+        id: String,
+        hasChildren: Bool = false,
+        level: Int? = nil,
+        numberedListItem: [RichText],
+        numberedListItemChildren: [Block]? = nil,
+        blockChildren: [Block]? = nil
+    ) -> Self {
+        let numberedListItem = Block.NumberedListItem(richTexts: numberedListItem, children: numberedListItemChildren)
+        let block = Block(
+            id: id,
+            hasChildren: hasChildren,
+            type: .numberedListItem(numberedListItem),
+            level: level,
+            children: blockChildren
+        )
+        return block
+    }
 }
