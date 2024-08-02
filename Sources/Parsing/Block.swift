@@ -22,6 +22,7 @@ public extension Block {
         case paragraph(Paragraph)
         case quote(Quote)
         case table(Table)
+        case tableRow(TableRow)
         case video(Video)
     }
 }
@@ -46,6 +47,7 @@ extension Block: Codable {
             case paragraph
             case quote
             case table
+            case tableRow
             case video
         }
     }
@@ -92,6 +94,9 @@ extension Block: Codable {
         case .table:
             let table = try typesContainer.decode(Table.self, forKey: .table)
             self.type = .table(table)
+        case .tableRow:
+            let tableRow = try typesContainer.decode(TableRow.self, forKey: .tableRow)
+            self.type = .tableRow(tableRow)
         case .video:
             let video = try typesContainer.decode(Video.self, forKey: .video)
             self.type = .video(video)
@@ -142,6 +147,9 @@ extension Block: Codable {
         case .table(let table):
             try container.encode(CodingKeys.Types.table.rawValue, forKey: .type)
             try typesContainer.encode(table, forKey: .table)
+        case .tableRow(let tableRow):
+            try container.encode(CodingKeys.Types.tableRow.rawValue, forKey: .type)
+            try typesContainer.encode(tableRow, forKey: .tableRow)
         case .video(let video):
             try container.encode(CodingKeys.Types.video.rawValue, forKey: .type)
             try typesContainer.encode(video, forKey: .video)

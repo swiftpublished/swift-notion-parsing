@@ -114,4 +114,23 @@ extension Block {
         )
         return block
     }
+
+    static func tableRow(
+        id: String,
+        hasChildren: Bool = false,
+        level: Int? = nil,
+        tableRow: [[RichText]],
+        tableRowChildren: [Block]? = nil,
+        blockChildren: [Block]? = nil
+    ) -> Self {
+        let tableRow = Block.TableRow(richTexts: tableRow, children: tableRowChildren)
+        let block = Block(
+            id: id,
+            hasChildren: hasChildren,
+            type: .tableRow(tableRow),
+            level: level,
+            children: blockChildren
+        )
+        return block
+    }
 }
