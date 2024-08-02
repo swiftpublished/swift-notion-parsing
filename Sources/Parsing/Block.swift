@@ -21,6 +21,7 @@ public extension Block {
         case numberedListItem(NumberedListItem)
         case paragraph(Paragraph)
         case quote(Quote)
+        case table(Table)
         case video(Video)
     }
 }
@@ -44,6 +45,7 @@ extension Block: Codable {
             case numbered_list_item
             case paragraph
             case quote
+            case table
             case video
         }
     }
@@ -87,6 +89,9 @@ extension Block: Codable {
         case .quote:
             let quote = try typesContainer.decode(Quote.self, forKey: .quote)
             self.type = .quote(quote)
+        case .table:
+            let table = try typesContainer.decode(Table.self, forKey: .table)
+            self.type = .table(table)
         case .video:
             let video = try typesContainer.decode(Video.self, forKey: .video)
             self.type = .video(video)
@@ -134,6 +139,9 @@ extension Block: Codable {
         case .quote(let quote):
             try container.encode(CodingKeys.Types.quote.rawValue, forKey: .type)
             try typesContainer.encode(quote, forKey: .quote)
+        case .table(let table):
+            try container.encode(CodingKeys.Types.table.rawValue, forKey: .type)
+            try typesContainer.encode(table, forKey: .table)
         case .video(let video):
             try container.encode(CodingKeys.Types.video.rawValue, forKey: .type)
             try typesContainer.encode(video, forKey: .video)
