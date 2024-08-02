@@ -20,11 +20,11 @@ extension Block {
         )
         return block
     }
-
+    
     static func paragraph(_ paragraph: [RichText]) -> Self {
         .paragraph(id: UUID.zeros.uuidString, paragraph: paragraph)
     }
-
+    
     static func heading1(id: String, heading1: [RichText]) -> Self {
         let heading1 = Block.Heading(richTexts: heading1, isToggleable: false)
         let block = Block(
@@ -36,7 +36,7 @@ extension Block {
         )
         return block
     }
-
+    
     static func externalImage(url: String, caption: [RichText]?) -> Self {
         let image: Self.Image = .external(url: url, caption: caption)
         let block = Block(
@@ -48,7 +48,7 @@ extension Block {
         )
         return block
     }
-
+    
     static func notionImage(url: String, expiry: String) -> Self {
         let image: Self.Image = .notion(url: url, expiry: expiry)
         let block = Block(
@@ -60,7 +60,7 @@ extension Block {
         )
         return block
     }
-
+    
     static func quote(
         id: String,
         hasChildren: Bool = false,
@@ -79,11 +79,11 @@ extension Block {
         )
         return block
     }
-
+    
     static func quote(_ quote: [RichText]) -> Self {
         .quote(id: UUID.zeros.uuidString, quote: quote)
     }
-
+    
     static func externalVideo(url: String, caption: [RichText]?) -> Self {
         let video: Self.Video = .external(url: url, caption: caption)
         let block = Block(
@@ -95,7 +95,7 @@ extension Block {
         )
         return block
     }
-
+    
     static func numberedListItem(
         id: String,
         hasChildren: Bool = false,
@@ -114,7 +114,7 @@ extension Block {
         )
         return block
     }
-
+    
     static func tableRow(
         id: String,
         hasChildren: Bool = false,
