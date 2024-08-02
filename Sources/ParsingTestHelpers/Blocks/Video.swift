@@ -1,3 +1,4 @@
+import Foundation
 import NotionParsing
 
 extension Block.Video {
@@ -8,7 +9,7 @@ extension Block.Video {
         )
         let file = Block.File(caption: nil, type: .notion(fileType))
 
-        return Self(file: file)
+        return Self(file: file, type: .unknown)
     }
 
     static func external(url: String, caption: [RichText]?) -> Self {
@@ -17,6 +18,6 @@ extension Block.Video {
         )
         let file = Block.File(caption: caption, type: .external(fileType))
 
-        return Self(file: file)
+        return Self(file: file, type: .unknown)
     }
 }

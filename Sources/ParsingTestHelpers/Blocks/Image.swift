@@ -1,4 +1,6 @@
+import Foundation
 import NotionParsing
+
 
 extension Block.Image {
     static func notion(url: String, expiry: String) -> Self {
