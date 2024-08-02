@@ -14,7 +14,7 @@ final class TableTests: XCTestCase {
                     }
                 }
                 """
-        let expected: Block.Table = .createSampleTableData(width: 2, hasColumnHeader: true, hasRowHeader: true)
+        let expected: Block.Table = .createSampleTableData(tableWidth: 2, hasColumnHeader: true, hasRowHeader: true)
         try assert(decoding: json, to: expected)
     }
 }
