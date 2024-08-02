@@ -13,6 +13,7 @@ public extension Block {
     enum Types: Codable, Equatable {
         case bulletedListItem(BulletedListItem)
         case code(Code)
+        case divider(Divider)
         case embed(Embed)
         case heading1(Heading)
         case heading2(Heading)
@@ -38,6 +39,7 @@ extension Block: Codable {
         enum Types: String, CodingKey, Decodable {
             case bulleted_list_item
             case code
+            case divider
             case embed
             case heading_1
             case heading_2
@@ -67,6 +69,9 @@ extension Block: Codable {
         case .code:
             let code = try typesContainer.decode(Code.self, forKey: .code)
             self.type = .code(code)
+        case .divider:
+            let divider = try typesContainer.decode(Divider.self, forKey: .divider)
+            self.type = .divider(divider)
         case .embed:
             let embed = try typesContainer.decode(Embed.self, forKey: .embed)
             self.type = .embed(embed)
@@ -120,6 +125,9 @@ extension Block: Codable {
         case .code(let code):
             try container.encode(CodingKeys.Types.code.rawValue, forKey: .type)
             try typesContainer.encode(code, forKey: .code)
+        case .divider(let divider):
+            try container.encode(CodingKeys.Types.divider.rawValue, forKey: .type)
+            try typesContainer.encode(divider, forKey: .divider)
         case .embed(let embed):
             try container.encode(CodingKeys.Types.embed.rawValue, forKey: .type)
             try typesContainer.encode(embed, forKey: .embed)
