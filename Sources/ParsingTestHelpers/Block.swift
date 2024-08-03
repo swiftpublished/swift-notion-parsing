@@ -133,4 +133,23 @@ extension Block {
         )
         return block
     }
+
+    static func toggle(
+        id: String,
+        hasChildren: Bool = false,
+        level: Int? = nil,
+        toggle: [RichText],
+        toggleChildren: [Block]? = nil,
+        blockChildren: [Block]? = nil
+    ) -> Self {
+        let toggle = Block.Toggle(richTexts: toggle, children: toggleChildren)
+        let block = Block(
+            id: id,
+            hasChildren: hasChildren,
+            type: .toggle(toggle),
+            level: level,
+            children: blockChildren
+        )
+        return block
+    }
 }
