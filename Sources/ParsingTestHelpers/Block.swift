@@ -120,7 +120,7 @@ extension Block {
         return block
     }
 
-    static func notionCallout(emoji: String, richTexts: [RichText]) -> Self {
+    static func emojiCallout(emoji: String, richTexts: [RichText]) -> Self {
         let callout: Self.Callout = .emoji(emoji: emoji, richTexts: richTexts)
         let block = Block(
             id: UUID.zeros.uuidString,

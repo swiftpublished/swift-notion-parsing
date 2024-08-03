@@ -7,7 +7,7 @@ extension Block.Callout {
             url: URL(string: url)!,
             expiryTime: DateFormatter.iso8601Notion.date(from: expiry)!
         )
-        let file = Block.Icon(type: .notion(fileType))
+        let file = Block.Icon(type: .file(fileType))
 
         return Self(richTexts: richTexts, icon: file)
     }
