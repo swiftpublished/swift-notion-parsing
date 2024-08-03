@@ -3,9 +3,22 @@ import MacrosInterface
 
 public extension Block {
     @PublicInit
+    @CodingKeys
     struct Callout: Codable, Equatable {
         @CodingKey(name: "rich_text")
         let richTexts: [RichText]
+
+        public let icon: Icon
+        
+        public init(from decoder: any Decoder) throws {
+            self.richTexts = try [RichText](from: decoder)
+            self.icon = try Icon(from: decoder)
+        }
+
+        public func encode(to encoder: any Encoder) throws {
+            try richTexts.encode(to: encoder)
+            try icon.encode(to: encoder)
+        }
     }
 }
 
@@ -13,6 +26,7 @@ public extension Block {
     @PublicInit
     struct Icon: Codable, Equatable {
         public let type: Types
+
         public enum Types: Codable, Equatable {
             case emoji(String)
             case external(External)
@@ -28,6 +42,7 @@ public extension Block {
                 }
             }
         }
+
         enum CodingKeys: CodingKey {
             case type
 
@@ -37,7 +52,7 @@ public extension Block {
                 case external
             }
         }
-        
+
         public init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -71,6 +86,7 @@ public extension Block {
                 try typesContainer.encode(value, forKey: .external)
             }
         }
+
         @PublicInit
         @CodingKeys(using: .snake_case)
         public struct NotionHosted: Codable, Equatable {
