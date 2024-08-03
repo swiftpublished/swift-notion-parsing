@@ -12,6 +12,7 @@ public struct Block: Equatable, Identifiable {
 public extension Block {
     enum Types: Codable, Equatable {
         case bulletedListItem(BulletedListItem)
+        case callout(Callout)
         case code(Code)
         case divider(Divider)
         case embed(Embed)
@@ -39,6 +40,7 @@ extension Block: Codable {
 
         enum Types: String, CodingKey, Decodable {
             case bulleted_list_item
+            case callout
             case code
             case divider
             case embed
@@ -68,6 +70,9 @@ extension Block: Codable {
         case .bulleted_list_item:
             let bulletedListItem = try typesContainer.decode(BulletedListItem.self, forKey: .bulleted_list_item)
             self.type = .bulletedListItem(bulletedListItem)
+        case .callout:
+            let callout = try typesContainer.decode(Callout.self, forKey: .callout)
+            self.type = .callout(callout)
         case .code:
             let code = try typesContainer.decode(Code.self, forKey: .code)
             self.type = .code(code)
@@ -127,6 +132,9 @@ extension Block: Codable {
         case .bulletedListItem(let bulletedListItem):
             try container.encode(CodingKeys.Types.bulleted_list_item.rawValue, forKey: .type)
             try typesContainer.encode(bulletedListItem, forKey: .bulleted_list_item)
+        case .callout(let callout):
+            try container.encode(CodingKeys.Types.callout.rawValue, forKey: .type)
+            try typesContainer.encode(callout, forKey: .callout)
         case .code(let code):
             try container.encode(CodingKeys.Types.code.rawValue, forKey: .type)
             try typesContainer.encode(code, forKey: .code)

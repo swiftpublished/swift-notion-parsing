@@ -95,7 +95,43 @@ extension Block {
         )
         return block
     }
-    
+
+    static func externalCallout(url: String, richTexts: [RichText]) -> Self {
+        let callout: Self.Callout = .external(url: url, richTexts: richTexts)
+        let block = Block(
+            id: UUID.zeros.uuidString,
+            hasChildren: false,
+            type: .callout(callout),
+            level: nil,
+            children: nil
+        )
+        return block
+    }
+
+    static func notionCallout(url: String, expiry: String, richTexts: [RichText]) -> Self {
+        let callout: Self.Callout = .notion(url: url, expiry: expiry, richTexts: richTexts)
+        let block = Block(
+            id: UUID.zeros.uuidString,
+            hasChildren: false,
+            type: .callout(callout),
+            level: nil,
+            children: nil
+        )
+        return block
+    }
+
+    static func notionCallout(emoji: String, richTexts: [RichText]) -> Self {
+        let callout: Self.Callout = .emoji(emoji: emoji, richTexts: richTexts)
+        let block = Block(
+            id: UUID.zeros.uuidString,
+            hasChildren: false,
+            type: .callout(callout),
+            level: nil,
+            children: nil
+        )
+        return block
+    }
+
     static func numberedListItem(
         id: String,
         hasChildren: Bool = false,
