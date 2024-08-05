@@ -6,7 +6,6 @@ public extension Block {
     @CodingKeys
     struct Embed: Codable, Equatable {
         public let url: URL
-
-        let caption: [RichText]?
+        public let caption: [RichText]?
     }
 }
