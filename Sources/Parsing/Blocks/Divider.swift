@@ -1,5 +1,5 @@
 import MacrosInterface
 
 public extension Block {
-    struct Divider: Codable, Equatable {}
+    struct Divider: Codable, Equatable {  }
 }
