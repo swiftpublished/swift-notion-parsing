@@ -6,7 +6,7 @@ public extension Block {
     @CodingKeys
     struct Callout: Codable, Equatable {
         @CodingKey(name: "rich_text")
-        let richTexts: [RichText]
+        public let richTexts: [RichText]
 
         public let icon: Icon
         
