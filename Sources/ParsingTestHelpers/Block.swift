@@ -188,4 +188,24 @@ extension Block {
         )
         return block
     }
+
+    static func todo(
+        id: String,
+        hasChildren: Bool = false,
+        level: Int? = nil,
+        todo: [RichText],
+        todoChecked: Bool = false,
+        todoChildren: [Block]? = nil,
+        blockChildren: [Block]? = nil
+    ) -> Self {
+        let todo = Block.Todo(richTexts: todo, checked: todoChecked, children: todoChildren)
+        let block = Block(
+            id: id,
+            hasChildren: hasChildren,
+            type: .todo(todo),
+            level: level,
+            children: blockChildren
+        )
+        return block
+    }
 }

@@ -25,6 +25,7 @@ public extension Block {
         case quote(Quote)
         case table(Table)
         case tableRow(TableRow)
+        case todo(Todo)
         case toggle(Toggle)
         case video(Video)
     }
@@ -53,6 +54,7 @@ extension Block: Codable {
             case quote
             case table
             case tableRow
+            case todo
             case toggle
             case video
         }
@@ -109,6 +111,9 @@ extension Block: Codable {
         case .tableRow:
             let tableRow = try typesContainer.decode(TableRow.self, forKey: .tableRow)
             self.type = .tableRow(tableRow)
+        case .todo:
+            let todo = try typesContainer.decode(Todo.self, forKey: .tableRow)
+            self.type = .todo(todo)
         case .toggle:
             let toggle = try typesContainer.decode(Toggle.self, forKey: .toggle)
             self.type = .toggle(toggle)
@@ -171,6 +176,9 @@ extension Block: Codable {
         case .tableRow(let tableRow):
             try container.encode(CodingKeys.Types.tableRow.rawValue, forKey: .type)
             try typesContainer.encode(tableRow, forKey: .tableRow)
+        case .todo(let todo):
+            try container.encode(CodingKeys.Types.todo.rawValue, forKey: .type)
+            try typesContainer.encode(todo, forKey: .todo)
         case .toggle(let toggle):
             try container.encode(CodingKeys.Types.toggle.rawValue, forKey: .type)
             try typesContainer.encode(toggle, forKey: .toggle)
