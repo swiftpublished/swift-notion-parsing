@@ -9,7 +9,7 @@ extension Block.Video {
         )
         let file = Block.File(caption: nil, type: .notion(fileType))
 
-        return Self(file: file, type: .unknown)
+        return Self(file: file)
     }
 
     static func external(url: String, caption: [RichText]?) -> Self {
@@ -18,6 +18,6 @@ extension Block.Video {
         )
         let file = Block.File(caption: caption, type: .external(fileType))
 
-        return Self(file: file, type: .unknown)
+        return Self(file: file)
     }
 }
