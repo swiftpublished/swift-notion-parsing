@@ -8,7 +8,7 @@ extension Page {
         title richTexts: [RichText]
     ) -> Self {
         let title = Page.Properties.Title(richTexts: richTexts)
-        let properties = Page.Properties(title: title)
+        let properties = Page.Properties(title: title, richTitle: nil)
 
         return Page(
             id: UUID(uuidString: id)!,
@@ -26,7 +26,7 @@ extension Page {
         paragraph: [RichText]
     ) -> Self {
         let title = Page.Properties.Title(richTexts: richTexts)
-        let properties = Page.Properties(title: title)
+        let properties = Page.Properties(title: title, richTitle: nil)
 
         let block: Block = .paragraph(id: blockId, paragraph: paragraph)
         let content = Content(nextCursor: nil, hasMore: false, blocks: [block])

@@ -16,13 +16,13 @@ public struct Page: Codable, Equatable {
 
         @CodingKey(name: "Rich Title")
         public let richTitle: RichTitle?
-
+        @PublicInit
         @CodingKeys
         public struct Title: Codable, Equatable {
             @CodingKey(name: "title")
             public let richTexts: [RichText]
         }
-
+        @PublicInit
         @CodingKeys
         public struct RichTitle: Codable, Equatable {
             @CodingKey(name: "rich_text")
