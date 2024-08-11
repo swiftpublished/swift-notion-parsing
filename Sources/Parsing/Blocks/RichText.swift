@@ -31,7 +31,7 @@ public extension RichText {
         public let italic: Bool
         public let strikethrough: Bool
         public let underline: Bool
-        let code: Bool
+        public let code: Bool
     }
 }
 

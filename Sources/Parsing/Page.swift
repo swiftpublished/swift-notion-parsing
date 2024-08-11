@@ -14,17 +14,19 @@ public struct Page: Codable, Equatable {
     public struct Properties: Codable, Equatable {
         public let title: Title
 
-        @PublicInit
+        @CodingKey(name: "Rich Title")
+        public let richTitle: RichTitle?
+
         @CodingKeys
         public struct Title: Codable, Equatable {
             @CodingKey(name: "title")
             public let richTexts: [RichText]
+        }
 
-            public init(from decoder: Decoder) throws {
-                let container = try decoder.container(keyedBy: CodingKeys.self)
-
-                self.richTexts = try container.decode([RichText].self, forKey: .richTexts)
-            }
+        @CodingKeys
+        public struct RichTitle: Codable, Equatable {
+            @CodingKey(name: "rich_text")
+            public let richTexts: [RichText]
         }
     }
 }
