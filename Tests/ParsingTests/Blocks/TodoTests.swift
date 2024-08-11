@@ -33,4 +33,3 @@ final class TodoTests: XCTestCase {
         try assert(decoding: json, to: expected)
     }
 }
-
