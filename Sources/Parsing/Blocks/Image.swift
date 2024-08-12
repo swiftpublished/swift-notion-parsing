@@ -21,6 +21,7 @@ public extension Block {
     struct File: Codable, Equatable {
         public let caption: [RichText]?
         public let type: Types
+        public let name: String?
 
         public var alternateText: String? {
             caption?.plainTexts
@@ -42,6 +43,7 @@ public extension Block {
 
         enum CodingKeys: CodingKey {
             case caption
+            case name
             case type
 
             enum Types: String, CodingKey, Decodable {
@@ -54,6 +56,7 @@ public extension Block {
             let container = try decoder.container(keyedBy: CodingKeys.self)
 
             self.caption = try container.decodeIfPresent([RichText].self, forKey: .caption)
+            self.name = try container.decodeIfPresent(String.self, forKey: .name)
 
             let type = try container.decode(CodingKeys.Types.self, forKey: .type)
             let typesContainer = try decoder.container(keyedBy: CodingKeys.Types.self)
@@ -71,6 +74,7 @@ public extension Block {
             var container = encoder.container(keyedBy: CodingKeys.self)
 
             try container.encodeIfPresent(caption, forKey: .caption)
+            try container.encodeIfPresent(name, forKey: .name)
 
             var typesContainer = encoder.container(keyedBy: CodingKeys.Types.self)
             switch self.type {
