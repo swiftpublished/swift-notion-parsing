@@ -54,5 +54,3 @@ final class TableRowTests: XCTestCase {
         try assert(decoding: json, to: expected)
     }
 }
-
-

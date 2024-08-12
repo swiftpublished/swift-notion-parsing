@@ -13,4 +13,3 @@ final class EquationTests: XCTestCase {
         try assert(decoding: json, to: expected)
     }
 }
-
