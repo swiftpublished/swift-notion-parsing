@@ -17,6 +17,7 @@ public extension Block {
         case divider(Divider)
         case embed(Embed)
         case equation(Equation)
+        case file(File)
         case heading1(Heading)
         case heading2(Heading)
         case heading3(Heading)
@@ -47,6 +48,7 @@ extension Block: Codable {
             case divider
             case embed
             case equation
+            case file
             case heading_1
             case heading_2
             case heading_3
@@ -89,6 +91,9 @@ extension Block: Codable {
         case .equation:
             let equation = try typesContainer.decode(Equation.self, forKey: .equation)
             self.type = .equation(equation)
+        case .file:
+            let file = try typesContainer.decode(File.self, forKey: .file)
+            self.type = .file(file)
         case .heading_1:
             let heading = try typesContainer.decode(Heading.self, forKey: .heading_1)
             self.type = .heading1(heading)
@@ -157,6 +162,9 @@ extension Block: Codable {
         case .equation(let equation):
             try container.encode(CodingKeys.Types.equation.rawValue, forKey: .type)
             try typesContainer.encode(equation, forKey: .equation)
+        case .file(let file):
+            try container.encode(CodingKeys.Types.file.rawValue, forKey: .type)
+            try typesContainer.encode(file, forKey: .file)
         case .heading1(let heading1):
             try container.encode(CodingKeys.Types.heading_1.rawValue, forKey: .type)
             try typesContainer.encode(heading1, forKey: .heading_1)
