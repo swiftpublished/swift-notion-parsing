@@ -7,7 +7,7 @@ extension Block.Video {
             url: URL(string: url)!,
             expiryTime: DateFormatter.iso8601Notion.date(from: expiry)!
         )
-        let file = Block.File(caption: nil, type: .notion(fileType))
+        let file = Block.File(caption: nil, type: .notion(fileType), name: nil)
 
         return Self(file: file)
     }
@@ -16,7 +16,7 @@ extension Block.Video {
         let fileType = Block.File.External(
             url: URL(string: url)!
         )
-        let file = Block.File(caption: caption, type: .external(fileType))
+        let file = Block.File(caption: caption, type: .external(fileType), name: nil)
 
         return Self(file: file)
     }
