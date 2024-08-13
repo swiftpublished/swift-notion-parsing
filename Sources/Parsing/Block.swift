@@ -24,6 +24,7 @@ public extension Block {
         case image(Image)
         case numberedListItem(NumberedListItem)
         case paragraph(Paragraph)
+        case pdf(Pdf)
         case quote(Quote)
         case table(Table)
         case tableRow(TableRow)
@@ -55,6 +56,7 @@ extension Block: Codable {
             case image
             case numbered_list_item
             case paragraph
+            case pdf
             case quote
             case table
             case tableRow
@@ -112,6 +114,9 @@ extension Block: Codable {
         case .paragraph:
             let paragraph = try typesContainer.decode(Paragraph.self, forKey: .paragraph)
             self.type = .paragraph(paragraph)
+        case .pdf:
+            let pdf = try typesContainer.decode(Pdf.self, forKey: .pdf)
+            self.type = .pdf(pdf)
         case .quote:
             let quote = try typesContainer.decode(Quote.self, forKey: .quote)
             self.type = .quote(quote)
@@ -183,6 +188,9 @@ extension Block: Codable {
         case .paragraph(let paragraph):
             try container.encode(CodingKeys.Types.paragraph.rawValue, forKey: .type)
             try typesContainer.encode(paragraph, forKey: .paragraph)
+        case .pdf(let pdf):
+            try container.encode(CodingKeys.Types.pdf.rawValue, forKey: .type)
+            try typesContainer.encode(pdf, forKey: .pdf)
         case .quote(let quote):
             try container.encode(CodingKeys.Types.quote.rawValue, forKey: .type)
             try typesContainer.encode(quote, forKey: .quote)
