@@ -12,6 +12,18 @@ extension RichText {
         let text = RichText.Types.Text(content: content, link: link)
         return RichText(type: .text(text), annotations: annotations, plainText: content)
     }
+
+    static func mention(_ content: String, _ annotations: RichText.Annotations = .normal, userID: String) -> Self {
+        let userMention = RichText.Types.Mention.User(object: "user", id: userID)
+        let mention = RichText.Types.Mention(type: .user(userMention))
+        return RichText(type: .mention(mention), annotations: annotations, plainText: content)
+    }
+
+    static func mention(_ content: String, _ annotations: RichText.Annotations = .normal, startDate: String, endDate: String? = nil, timeZone: String? = nil) -> Self {
+        let dateMention = RichText.Types.Mention.DateMention(start: startDate, end: endDate, timeZone: timeZone)
+        let mention = RichText.Types.Mention(type: .date(dateMention))
+        return RichText(type: .mention(mention), annotations: annotations, plainText: content)
+    }
 }
 
 extension RichText.Annotations {

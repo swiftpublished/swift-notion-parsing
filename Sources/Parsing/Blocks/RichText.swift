@@ -16,11 +16,14 @@ public struct RichText: Equatable, Codable {
 public extension RichText {
     enum Types: Codable, Equatable, CustomStringConvertible {
         case text(Text)
+        case mention(Mention)
 
         public var description: String {
             switch self {
             case .text(let text):
                 return text.content
+            case .mention(_):
+                return ""
             }
         }
     }
@@ -43,6 +46,7 @@ extension RichText {
 
         enum Types: String, CodingKey, Decodable {
             case text
+            case mention
         }
     }
 
@@ -55,6 +59,9 @@ extension RichText {
         case .text:
             let text = try typesContainer.decode(Types.Text.self, forKey: .text)
             self.type = .text(text)
+        case .mention:
+            let mention = try typesContainer.decode(Types.Mention.self, forKey: .mention)
+            self.type = .mention(mention)
         }
 
         self.annotations = try container.decode(Annotations.self, forKey: .annotations)
@@ -69,6 +76,9 @@ extension RichText {
         case .text(let text):
             try container.encode(CodingKeys.Types.text.rawValue, forKey: .type)
             try typesContainer.encode(text, forKey: .text)
+        case .mention(let mention):
+            try container.encode(CodingKeys.Types.mention.rawValue, forKey: .type)
+            try typesContainer.encode(mention, forKey: .mention)
         }
 
         try container.encode(annotations, forKey: .annotations)
