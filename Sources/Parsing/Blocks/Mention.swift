@@ -6,7 +6,7 @@ public extension RichText.Types {
         public let type: MentionType
 
         public enum MentionType: Codable, Equatable {
-            case page(Page)
+            case page(PageMention)
             case user(User)
             case date(DateMention)
         }
@@ -24,7 +24,7 @@ public extension RichText.Types {
 
             switch type {
             case "page":
-                let page = try container.decode(Page.self, forKey: .page)
+                let page = try container.decode(PageMention.self, forKey: .page)
                 self.type = .page(page)
             case "user":
                 let user = try container.decode(User.self, forKey: .user)
@@ -65,6 +65,11 @@ public extension RichText.Types {
             let start: String
             let end: String?
             let timeZone: String?
+        }
+
+        @PublicInit
+        public struct PageMention: Codable, Equatable { // Renamed to avoid conflict
+            let id: String
         }
     }
 }
