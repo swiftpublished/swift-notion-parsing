@@ -141,6 +141,7 @@ final class CalloutTests: XCTestCase {
                 "strikethrough" : false,
                 "underline" : false
               },
+              "href" : null,
               "plain_text" : "Swift Programming",
               "text" : {
                 "content" : "Swift Programming"
@@ -174,6 +175,7 @@ final class CalloutTests: XCTestCase {
                 "strikethrough" : false,
                 "underline" : false
               },
+              "href" : null,
               "plain_text" : "Free Shipping",
               "text" : {
                 "content" : "Free Shipping"

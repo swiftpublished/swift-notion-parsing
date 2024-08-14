@@ -5,11 +5,14 @@ public struct RichText: Equatable, Codable {
     public let type: Types
     public let annotations: Annotations
     public let plainText: String
+    public let href: String?
 
-    public init(type: Types, annotations: Annotations, plainText: String) {
+
+    public init(type: Types, annotations: Annotations, plainText: String, href: String? = nil) {
         self.type = type
         self.annotations = annotations
         self.plainText = plainText
+        self.href = href
     }
 }
 
@@ -43,6 +46,7 @@ extension RichText {
         case type
         case annotations
         case plain_text
+        case href
 
         enum Types: String, CodingKey, Decodable {
             case text
@@ -66,6 +70,7 @@ extension RichText {
 
         self.annotations = try container.decode(Annotations.self, forKey: .annotations)
         self.plainText = try container.decode(String.self, forKey: .plain_text)
+        self.href = try container.decodeIfPresent(String.self, forKey: .href)
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -83,6 +88,7 @@ extension RichText {
 
         try container.encode(annotations, forKey: .annotations)
         try container.encode(plainText, forKey: .plain_text)
+        try container.encode(href, forKey: .href)
     }
 }
 
