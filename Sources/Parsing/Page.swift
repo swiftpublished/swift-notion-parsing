@@ -5,7 +5,7 @@ import MacrosInterface
 @CodingKeys(using: .snake_case)
 public struct Page: Codable, Equatable {
     public let id: UUID
-    let lastEditedTime: Date
+    public let lastEditedTime: Date
     public let cover: Block.File?
     public let properties: Properties
     public var content: Content?
@@ -62,6 +62,7 @@ public struct Page: Codable, Equatable {
                 case to_do = "To-Do"
                 case in_progress = "In-Progress"
                 case in_review = "In-Review"
+                case ready_to_release = "Ready To Release"
                 case done = "Done"
                 case unknown
 
