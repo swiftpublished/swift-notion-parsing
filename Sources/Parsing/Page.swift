@@ -15,14 +15,17 @@ public struct Page: Codable, Equatable {
     public struct Properties: Codable, Equatable {
         public let title: Title
 
-        @CodingKey(name: "Status")
-        public let status: Status?
+        @CodingKey(name: "Rich Title")
+        public let richTitle: RichTitle?
 
         @CodingKey(name: "Meta Title")
         public let metaTitle: MetaTitle?
 
         @CodingKey(name: "Meta Description")
         public let metaDescription: MetaDescription?
+
+        @CodingKey(name: "Status")
+        public let status: Status?
 
         @PublicInit
         @CodingKeys
