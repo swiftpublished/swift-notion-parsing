@@ -4,7 +4,7 @@ import MacrosInterface
 @PublicInit
 @CodingKeys(using: .snake_case)
 public struct Page: Codable, Equatable {
-    let id: UUID
+    public let id: UUID
     let lastEditedTime: Date
     public let cover: Block.File?
     public let properties: Properties
@@ -15,8 +15,8 @@ public struct Page: Codable, Equatable {
     public struct Properties: Codable, Equatable {
         public let title: Title
 
-        @CodingKey(name: "Rich Title")
-        public let richTitle: RichTitle?
+        @CodingKey(name: "Status")
+        public let status: Status?
 
         @CodingKey(name: "Meta Title")
         public let metaTitle: MetaTitle?
@@ -50,6 +50,32 @@ public struct Page: Codable, Equatable {
         public struct MetaDescription: Codable, Equatable {
             @CodingKey(name: "rich_text")
             public let richTexts: [RichText]
+        }
+
+        @PublicInit
+        @CodingKeys
+        public struct Status: Codable, Equatable {
+            @CodingKey(name: "status")
+            public let value: Value?
+
+            public enum Value: String, Codable, Equatable {
+                case to_do = "To-Do"
+                case in_progress = "In-Progress"
+                case in_review = "In-Review"
+                case done = "Done"
+                case unknown
+
+                enum CodingKeys: CodingKey {
+                    case name
+                }
+
+                public init(from decoder: any Decoder) throws {
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+
+                    let name = try container.decode(String.self, forKey: .name)
+                    self = Self(rawValue: name) ?? .unknown
+                }
+            }
         }
     }
 }
