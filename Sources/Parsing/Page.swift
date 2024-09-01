@@ -79,6 +79,12 @@ public struct Page: Codable, Equatable {
                     let name = try container.decode(String.self, forKey: .name)
                     self = Self(rawValue: name) ?? .unknown
                 }
+
+                public func encode(to encoder: any Encoder) throws {
+                    var container = encoder.container(keyedBy: CodingKeys.self)
+
+                    try container.encode(self.rawValue, forKey: .name)
+                }
             }
         }
     }
