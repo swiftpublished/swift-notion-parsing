@@ -12,6 +12,8 @@ public extension Block {
         public let language: Language
 
         public enum Language: String, Codable {
+            case css
+            case html
             case swift
         }
     }
