@@ -15,8 +15,14 @@ public struct Page: Codable, Equatable {
     public struct Properties: Codable, Equatable {
         public let title: Title
 
-        @CodingKey(name: "Rich Title")
-        public let richTitle: RichTitle?
+        @CodingKey(name: "Article Title")
+        public let articleTitle: RichTitle?
+
+        @CodingKey(name: "Article Description")
+        public let articleDescription: RichDescription?
+
+        @CodingKey(name: "Cover Description")
+        public let coverDescription: CoverDescription?
 
         @CodingKey(name: "Meta Title")
         public let metaTitle: MetaTitle?
@@ -37,6 +43,20 @@ public struct Page: Codable, Equatable {
         @PublicInit
         @CodingKeys
         public struct RichTitle: Codable, Equatable {
+            @CodingKey(name: "rich_text")
+            public let richTexts: [RichText]
+        }
+
+        @PublicInit
+        @CodingKeys
+        public struct RichDescription: Codable, Equatable {
+            @CodingKey(name: "rich_text")
+            public let richTexts: [RichText]
+        }
+
+        @PublicInit
+        @CodingKeys
+        public struct CoverDescription: Codable, Equatable {
             @CodingKey(name: "rich_text")
             public let richTexts: [RichText]
         }
