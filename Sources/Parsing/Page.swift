@@ -5,6 +5,7 @@ import MacrosInterface
 @CodingKeys(using: .snake_case)
 public struct Page: Codable, Equatable {
     public let id: UUID
+    public let createdTime: Date
     public let lastEditedTime: Date
     public let cover: Block.File?
     public let properties: Properties
@@ -14,6 +15,12 @@ public struct Page: Codable, Equatable {
     @CodingKeys
     public struct Properties: Codable, Equatable {
         public let title: Title
+
+        @CodingKey(name: "Status")
+        public let status: Status?
+
+        @CodingKey(name: "Author")
+        public let author: Author?
 
         @CodingKey(name: "Article Title")
         public let articleTitle: RichTitle?
@@ -30,14 +37,24 @@ public struct Page: Codable, Equatable {
         @CodingKey(name: "Meta Description")
         public let metaDescription: MetaDescription?
 
-        @CodingKey(name: "Status")
-        public let status: Status?
+        @CodingKey(name: "Tags")
+        public let tags: Tags?
 
         @PublicInit
         @CodingKeys
         public struct Title: Codable, Equatable {
             @CodingKey(name: "title")
             public let richTexts: [RichText]
+        }
+
+        @PublicInit
+        @CodingKeys
+        public struct Author: Codable, Equatable {
+            public let people: [Person]
+
+            public struct Person: Codable, Equatable {
+                public let name: String
+            }
         }
 
         @PublicInit
@@ -73,6 +90,17 @@ public struct Page: Codable, Equatable {
         public struct MetaDescription: Codable, Equatable {
             @CodingKey(name: "rich_text")
             public let richTexts: [RichText]
+        }
+
+        @PublicInit
+        @CodingKeys
+        public struct Tags: Codable, Equatable {
+            @CodingKey(name: "multi_select")
+            public let selections: [Selection]
+
+            public struct Selection: Codable, Equatable {
+                public let name: String
+            }
         }
 
         @PublicInit
