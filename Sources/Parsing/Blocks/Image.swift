@@ -31,7 +31,7 @@ public extension Block {
             case notion(NotionHosted)
             case external(External)
 
-            public var url: URL {
+            public var url: Foundation.URL {
                 switch self {
                 case .notion(let file):
                     file.url
@@ -90,13 +90,13 @@ public extension Block {
         @PublicInit
         @CodingKeys(using: .snake_case)
         public struct NotionHosted: Codable, Equatable {
-            let url: URL
+            let url: Foundation.URL
             let expiryTime: Date
         }
 
         @PublicInit
         public struct External: Codable, Equatable {
-            public let url: URL
+            public let url: Foundation.URL
         }
     }
 }
