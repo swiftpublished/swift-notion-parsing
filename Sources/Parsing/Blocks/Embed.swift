@@ -5,7 +5,7 @@ public extension Block {
     @PublicInit
     @CodingKeys
     struct Embed: Codable, Equatable {
-        public let url: URL
+        public let url: Foundation.URL
         public let caption: [RichText]?
     }
 }
