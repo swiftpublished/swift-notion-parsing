@@ -13,10 +13,16 @@ public struct SponsorPage: Codable, Equatable {
         public let title: Title
 
         @CodingKey(name: "Description")
-        public let description: Description
+        public let description: Text
 
         @CodingKey(name: "Image")
         public let image: Block.URL
+
+        @CodingKey(name: "Image Alternate Text")
+        public let imageAlternateText: Text
+
+        @CodingKey(name: "CTA")
+        public let cta: Text
 
         @CodingKey(name: "Website")
         public let website: Block.URL
@@ -33,7 +39,7 @@ public struct SponsorPage: Codable, Equatable {
 
         @PublicInit
         @CodingKeys
-        public struct Description: Codable, Equatable {
+        public struct Text: Codable, Equatable {
             @CodingKey(name: "rich_text")
             public let richTexts: [RichText]
         }
